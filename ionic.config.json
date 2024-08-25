@@ -1,0 +1,7 @@
+{
+  "name": "echo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
