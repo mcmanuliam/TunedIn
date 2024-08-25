@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package git.mcmanuliam.echo;
 
 import com.getcapacitor.BridgeActivity;
 
