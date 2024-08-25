@@ -1,0 +1,8 @@
+node_modules/
+dist/
+www/
+android/
+ios/
+src/zone-flags.ts
+src/test.ts
+src/main.ts
