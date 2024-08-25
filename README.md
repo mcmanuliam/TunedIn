@@ -32,8 +32,6 @@ With Echo, the stack is designed with an emphasis on cross-platform compatibilit
 
 - **Config Based Dev**: Our approach to development should be highly configurable, allowing us to toggle features on or off as needed. This makes it easy to tailor the app to our needs and rapidly deploy updates or new features. Here's an [intro](https://medium.com/captech-corner/an-intro-to-configuration-driven-development-cdd-48a1c088baa9) which'll cover the basics.
 
-- **Translations**: By detaching translations from our templates, we can easily manage and update language support across the app. This ensures a smooth process for introducing new languages or adjusting text without complicating the codebase.
-
 - [**Pug**](https://pugjs.org/api/getting-started.html): We use Pug as our templating language for its ability to integrate JavaScript directly into templates. Pug’s mixins feature is particularly powerful, enabling us to reduce redundant code and maintain cleaner, more efficient templates.
 
 Our tech stack is carefully chosen to ensure Echo remains a dynamic, user-friendly platform that evolves with the needs of our global community.
