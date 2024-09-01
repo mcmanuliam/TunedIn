@@ -49,6 +49,7 @@
     "@capacitor/cli": "6.1.2",
     "@ionic/angular": "^8.2.7",
     "@ionic/angular-toolkit": "^11.0.1",
+    "@ionic/cli": "^7.2.0",
     "@supabase/supabase-js": "^2.45.2",
     "@types/jasmine": "~5.1.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
