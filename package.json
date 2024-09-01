@@ -30,6 +30,7 @@
     "@capacitor/ios": "^6.1.2",
     "@capacitor/keyboard": "6.0.2",
     "@capacitor/status-bar": "6.0.1",
+    "@ionic/storage-angular": "^4.0.0",
     "ionicons": "^7.2.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -48,6 +49,8 @@
     "@capacitor/cli": "6.1.2",
     "@ionic/angular": "^8.2.7",
     "@ionic/angular-toolkit": "^11.0.1",
+    "@ionic/cli": "^7.2.0",
+    "@supabase/supabase-js": "^2.45.2",
     "@types/jasmine": "~5.1.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
@@ -72,7 +75,13 @@
     "ng-cli-pug-loader": "^0.2.2",
     "ngx-pug-builders": "^17.0.1",
     "pug": "^3.0.3",
+    "swiper": "^11.1.11",
     "typescript": "~5.4.0"
+  },
+  "overrides": {
+    "@supabase/supabase-js": {
+      "@supabase/auth-js": "2.61.0"
+    }
   },
   "description": "An Ionic project"
 }

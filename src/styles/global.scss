@@ -25,13 +25,30 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
+@font-face {
+    font-family: 'Inter';
+    src: url('../assets/fonts/Inter.ttf') format('truetype'),
+}
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+// CSS rules
+.continue {
+    --background: var(--ion-button-background);
+    --background-focused: var(--ion-button-background-hover);
+    --background-hover: var(--ion-button-background-hover);
+    --background-activated: var(--ion-button-background-active);
+    --padding-end: 25vw;
+    --padding-start: 25vw;
+    .btn-text {
+        text-transform: uppercase;
+        font-size: large;
+        font-weight: 800;
+    }
+}
+
+a {
+    color: var(--ion-link-color);
+}
+
+h1, h2, h3, h4, h5, h6, p, a, span, div {
+    font-family: 'Inter', sans-serif;
+}

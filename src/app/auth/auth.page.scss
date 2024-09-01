@@ -1,0 +1,28 @@
+swiper-container {
+    margin: 3.5vw;
+    height: fit-content;
+}
+
+:host {
+    padding-top: 10vh;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: xx-large;
+}
+
+p {
+    font-size: smaller;
+}
+
+.inputs {
+    padding-top: 2.5vh;
+    padding-bottom: 5vh;
+}
+
+.submit {
+    width: 100%;
+    text-align: center;
+}
