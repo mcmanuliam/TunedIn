@@ -1,22 +1,19 @@
 # ECHO
 
 ## What is Echo?
-Echo is a unique platform that redefines how you document and share your travel experiences. It offers a thoughtful and reflective approach, allowing you to say, "I've been there too," while leaving your mark on the world.
+Echo is a unique platform that redefines how you document and share your travel experiences. It offers a different approach to social media akin to messages from dark souls, allowing you to say, "I've been there too" while leaving your mark on the world.
 
 #### Core Concepts
-Echo emphasizes intention over instant gratification. Instead of immediate posting, Echo introduces a 24-hour delay before your location-based posts—Echos—are shared. This delay not only adds anticipation but also enhances security and encourages users to carefully choose and reflect on their moments.
+Echo emphasizes the idea of leaving your mark. Instead of immediate posting, Echo introduces a 24-hour delay before your location-based posts are shared. This delay not only adds anticipation but also enhances security.
 
 ### Key Features
-**Post an Echo**: Capture the essence of your current location, from breathtaking views to hidden gems, and link a song to enhance the moment.
+**Post an Echo**: Capture the essence of your current location, from breathtaking views to hidden gems and recommendations, and link a song to enhance the moment.
 
-**Delayed Sharing**: After posting, your Echo becomes visible 24 hours later, embodying the idea of an "echo" and ensuring thoughtful sharing.
+**Delayed Sharing**: After posting, your Echo becomes visible 24 hours later, embodying the idea of an "echo" and ensuring security in sharing.
 
-**Echo Feed**: Explore Echos from around the world or filter by your followers and locations, each accompanied by the story and music behind the moment.
+**Echo Feed**: Explore Echos from around the world or filter by your followers and locations, each echo accompanied by the story and music behind the moment.
 
 **Echo Map**: An interactive map where you can discover where Echos are being posted globally, creating a visual journey of shared experiences.
-
-#### Why Echo?
-Echo is for travelers and adventurers who seek to go beyond mere snapshots. It's about capturing the true essence of your journeys, reflecting on them, and connecting with others in a meaningful way.
 
 ## What's in the Stack?
 With Echo, the stack is designed with an emphasis on cross-platform compatibility, maintainability, and adaptability. This will allows us to deliver a seamless and consistent user experience across different devices while keeping our codebase clean and efficient. Below are the key technologies we will use:
@@ -36,8 +33,60 @@ With Echo, the stack is designed with an emphasis on cross-platform compatibilit
 
 Our tech stack is carefully chosen to ensure Echo remains a dynamic, user-friendly platform that evolves with the needs of our global community.
 
+## How to get Started?
+As a pre-requisite it's best to read up on the [Ionic Getting Started Guide](https://ionicframework.com/docs/developing/starting) to introduce yourself to a lot of the concepts I mention here, once you've done that getting started should be as simple as cloning the repo and installing all deps:
+```
+npm ci --legacy-peer-deps
+```
+
+### To run through Web Browser
+Run through `ionic serve` which should load up a web browser window and give you the ability to live reload.
+
+### iOS and Android
+We use Capacitor to allow for cross-platform code, if you've used cordova this is quite similar, [Read about the differences here](https://ionic.io/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development).
+
+- Stop any instances of `ionic serve`
+- Run `ionic build` to generate the www directory used for native.
+- Run `ionic cap copy` to copy native changes to Angular.
+- Run `ionic cap sync` to copy over dependencies from Angular to native.
+- Now if you've setup Android and iOS to be able to run from cmd you will be able to run:
+  - `ionic cap run ios` to run the ios app (must be running mac with xcode installed)
+  - `ionic cap run android` to run the android (must have android studio installed)
+- If not then please follow the native guide for specific platforms [iOS](ios) or [Android](android)
+
+### iOS
+***Perform the steps mentioned above in [iOS and Android](ios-and-android) before attempting these steps***
+
+- Open the directory in xcode, this can be done through `ionic cap open ios`
+- Select an emulator from the dropdown in the top (I always go for the most recent but when it comes to test purposes it's best to go through a few different diverse options)
+- Click the `run` icon and an emulator should open up
+- You will notice a log will also attach to your emulator in xcode, this is the main way to debug iOS apps on older versions of mac os.
+
+To run the app on a local device you must be a part of the whitelisted devices setup in xcode, if you aren't setup feel free to change this over to your local team (don't push this change), if you wish to get this setup please message Liam for permission.
+
+- Enable dev mode on the device
+- Plugin the device to your mac
+- Make sure your device has the correct apple id setup
+  - On xcode navigate to `Signing and Capabilites`
+  - For your teamselect the team from the Apple id registered on your local device.
+  - On running select your device name and click run.
+
+Once you have run the app once through xcode it should be open to run through `ionic cap run ios` so feel free to only refer to [iOS and Android](ios-and-android) once this is complete.
+
+### Android
+***Perform the steps mentioned above in [iOS and Android](ios-and-android) before attempting these steps***
+
+- To start you will need to have a version of android studio downloaded - [Android Studio](https://developer.android.com/studio?gad_source=1&gclid=Cj0KCQjwrKu2BhDkARIsAD7GBotK3xKCEYVuBPv5du3RbeW8YkFV9HKniZHXrY8TfGXaygf76vfWIjsaAuicEALw_wcB&gclsrc=aw.ds)
+- Open the project in Android studio `ionic cap open android`
+- Download the required deps, they will appear on open of Android Studio
+- Open the device managment panel, should be by default on the right side of the screen
+- Select a device
+-   If no devices are listed you will need to download one
+- Once you have selected a device, run it
+- Run the app and you should see it load up on the emulator.
+  
 ## Creating a Commit
-A code base is only as good as it's organisation as soon as you start losing track of aditions everything falls apart, the way we are attempting to tackle this is through a strict naming convention, the general convention is:
+Want to contribute? There's a few rules, a code base is only as good as it's organisation as soon, as you start losing track of aditions everything falls apart, the way we are attempting to tackle this is through a strict naming convention, the general convention is:
 
 ```bash
 COMMIT_TYPE[PLATFORM](LOCATION): COMMIT_MSG #COMMIT_NUMBER
@@ -61,6 +110,3 @@ COMMIT_TYPE[PLATFORM](LOCATION): COMMIT_MSG #COMMIT_NUMBER
 **COMMIT_NUMBER** this will be the issue number, **ALL COMMITS MUST ORIGINATE FROM AN ISSUE**, if no issue is raised - raise one.
 
 A big concept with our Version Control strategy is to be clean and concise, a way for us to easily maintain this is through [**Squashing**](https://medium.com/@flaviocopes/git-squashing-vs-not-squashing-af5009f47d9e#:~:text=Let's%20talk%20about%20squashing.,even%20squash%20commits%20at%20all%E2%80%9D%3F) commits, rather than having a feature with: `do something`, `fix something`, `fix the new fix` being merged into the codebase we will just merge `do something`.
-
-## How to get Started?
-...
