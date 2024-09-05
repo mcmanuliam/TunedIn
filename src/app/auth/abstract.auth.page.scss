@@ -1,0 +1,16 @@
+:host {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &::before {
+        content: '';
+        position: fixed;
+        width: var(--echo-width-100);
+        height: var(--echo-space-10);
+        background: linear-gradient(to bottom, var(--ion-background-color), transparent);
+        pointer-events: none;
+        /* Move this above all other elements*/
+        z-index: 1000;
+    }
+  }

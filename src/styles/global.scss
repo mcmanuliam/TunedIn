@@ -30,18 +30,26 @@
     src: url('../assets/fonts/Inter.ttf') format('truetype'),
 }
 
-// CSS rules
+/* CSS rules */
+.text-heading {
+    text-transform: uppercase;
+    font-weight: var(--echo-weight-boldest);
+    font-size: var(--echo-font-size-xxlarge);
+}
+
 .continue {
     --background: var(--ion-button-background);
     --background-focused: var(--ion-button-background-hover);
     --background-hover: var(--ion-button-background-hover);
     --background-activated: var(--ion-button-background-active);
-    --padding-end: 25vw;
-    --padding-start: 25vw;
+    --border-color: var(--ion-button-border);
+    --border-style: solid;
+    --border-width: 1px;
+    width: var(--echo-width-75);
     .btn-text {
         text-transform: uppercase;
-        font-size: large;
-        font-weight: 800;
+        font-size: var(--echo-font-size-large);
+        font-weight: var(--echo-weight-bolder);
     }
 }
 

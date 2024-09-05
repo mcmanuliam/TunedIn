@@ -1,5 +1,5 @@
 export interface userProfile {
-    _id: string,
+    id: string,
 
     created_at: string,
 
@@ -10,4 +10,6 @@ export interface userProfile {
     display_name?: string,
 
     email?: string,
+
+    profile_setup: boolean,
 }

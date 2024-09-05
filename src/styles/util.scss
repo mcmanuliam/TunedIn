@@ -1,0 +1,158 @@
+/*
+ * Took the idea of --tg-space and ran with it, this allows us to standardise values in css,
+ * a good codebase is a consistent one, no more random percentages floating about in stylesheets.
+ *
+ * This is essentially our own cut down version of tailwind.
+ */
+
+@use "sass:map";
+
+/* Base spacing unit */
+$single: 1rem;
+
+/* Spacing values map */
+$spaces: (
+  0: 0,
+  1: $single * 0.25,
+  2: $single * 0.5,
+  3: $single,
+  4: $single * 1.5,
+  5: $single * 3,
+  10: $single * 6,
+  20: $single * 12,
+);
+
+/* Percentage breakpoints */
+$percentage-breakpoints: (
+  0: 0,
+  10: 10%,
+  20: 20%,
+  25: 25%,
+  30: 30%,
+  40: 40%,
+  50: 50%,
+  60: 60%,
+  75: 75%,
+  80: 80%,
+  90: 90%,
+  100: 100%
+);
+
+/* Base font size unit */
+$base: 1rem;
+
+$font-sizes: (
+  small: $base * 0.875,
+  medium: $base,
+  large: $base * 1.25,
+  xlarge: $base * 1.5,
+  xxlarge: $base * 1.75,
+);
+
+/* Define font weights */
+$font-weights: (
+  normal: 400,
+  bold: 700,
+  bolder: 800,
+  boldest: 900,
+);
+
+/* Generate font-size classes */
+@each $key, $size in $font-sizes {
+    .#{$key} {
+      font-size: $size !important;
+    }
+  }
+
+/* Generate font-weight classes */
+@each $weight, $value in $font-weights {
+    .fw-#{$weight} {
+      font-weight: $value !important;
+    }
+}
+
+/*
+ * Generate CSS variables for spacers, fonts and breakpoints.
+ * These will be accessed through:
+ *   var(--echo-space-...)
+ *   var(--echo-width-...)
+ *   var(--echo-weight-...)
+ *   var(--echo-font-size-...)
+ */
+:root {
+    @each $k, $space in $spaces {
+      --echo-space-#{$k}: #{$space};
+    }
+    @each $k, $width in $percentage-breakpoints {
+      --echo-width-#{$k}: #{$width};
+    }
+    @each $k, $width in $font-weights {
+      --echo-weight-#{$k}: #{$width};
+    }
+    @each $k, $width in $font-sizes {
+      --echo-font-size-#{$k}: #{$width};
+    }
+  }
+
+/* Map to hold references to CSS variables for spacers */
+$varred-spacers: ();
+@each $k in map.keys($spaces) {
+  $varred-spacers: map.set($varred-spacers, $k, var(--echo-space-#{$k}));
+}
+
+$varred-widths: ();
+@each $k in map.keys($percentage-breakpoints) {
+  $varred-widths: map.set($varred-widths, $k, var(--echo-width-#{$k}));
+}
+
+/* mappings for generating utility classes */
+$mappings: (
+  /* Margin utilities */
+  margin-bottom: (clazz: mb, values: $varred-spacers),
+  margin-left: (clazz: ms, values: $varred-spacers),
+  margin-right: (clazz: me, values: $varred-spacers),
+  margin-top: (clazz: mt, values: $varred-spacers),
+  margin-top-bottom: (clazz: mtb, values: $varred-spacers),
+
+  /* Padding utilities */
+  padding-bottom: (clazz: pb, values: $varred-spacers),
+  padding-left: (clazz: ps, values: $varred-spacers),
+  padding-right: (clazz: pe, values: $varred-spacers),
+  padding-top: (clazz: pt, values: $varred-spacers),
+  padding-top-bottom: (clazz: ptb, values: $varred-spacers),
+
+  /* Width utilities */
+  max-width: (clazz: mw, values: $percentage-breakpoints),
+  width: (clazz: w, values: $percentage-breakpoints),
+);
+
+/* Generate utility classes */
+@each $prop, $spec in $mappings {
+  @each $value_alias, $value in map.get($spec, "values") {
+    @if ($prop == margin-top-bottom) {
+      .#{map.get($spec, "clazz")}-#{$value_alias} {
+        margin-top: #{$value} !important;
+        margin-bottom: #{$value} !important;
+      }
+    } @else if ($prop == padding-top-bottom) {
+      .#{map.get($spec, "clazz")}-#{$value_alias} {
+        padding-top: #{$value} !important;
+        padding-bottom: #{$value} !important;
+      }
+    } @else {
+      .#{map.get($spec, "clazz")}-#{$value_alias} {
+        #{$prop}: #{$value} !important;
+      }
+    }
+  }
+}
+
+/* CSS Rules */
+.vertical-center {
+  display: flex;
+  align-items: center;
+}
+
+.text-center {
+  text-align: center !important;
+}

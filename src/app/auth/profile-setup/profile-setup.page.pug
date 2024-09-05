@@ -1,0 +1,10 @@
+abstract-auth-page([heading]="heading", [description]="description").ion-page
+    form((ngSubmit)='onSubmit()', #profileSetupForm='ngForm')
+        .mt-4.mb-5
+            ion-item.mb-2
+                ion-label([position]="'floating'") Display Name
+                ion-input([(ngModel)]='value.displayName', id='displayName', name='display_name', aria-label='display_name', required)
+
+        .text-center
+            ion-button.continue.mb-3(type='submit', shape='round', [disabled]="profileSetupForm.invalid || busy")
+                .btn-text Confirm

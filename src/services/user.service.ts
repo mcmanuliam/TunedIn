@@ -1,6 +1,7 @@
 import {inject, Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
 import type {userProfile} from "../models/user";
+import {LogService} from "./log.service";
 import {SupabaseService} from "./supabase.service";
 
 @Injectable({
@@ -30,20 +31,42 @@ export class UserService {
     this.#userSubject.next(null);
   }
 
-  public async fetchUserProfile(userId: string): Promise<userProfile | null> {
+  public async get(userId?: string): Promise<userProfile | null> {
     const {data, error} = await this.#supaSvc.client
       .from('profiles')
       .select('*')
-      .eq('id', userId)
+      .eq('id', userId ?? this.user?.id)
       .single();
 
     if (error) {
-      console.error('[user.service.fetchUserProfile] Error fetching user profile:', error);
+      LogService.error('Error fetching user profile:', 'user.service.get', error);
       return null;
     }
 
-    const userProfile = data as userProfile;
-    this.user = userProfile;
-    return userProfile;
+    this.user = data as userProfile;
+    return this.user;
+  }
+
+  public async update(opts: GenericObject<any>, userId?: string): Promise<userProfile | null> {
+    const {error} = await this.#supaSvc.client
+      .from('profiles')
+      .update(opts)
+      .eq('id', userId ?? this.user?.id)
+      .single();
+
+    if (error) {
+      LogService.error('Error updating user profile:', 'user.service.update', error);
+      return null;
+    }
+
+    this.user = {...this.user, ...opts} as userProfile;
+    return this.user;
+  }
+
+  public async finialiseProfile(opts: GenericObject<any>): Promise<userProfile | null> {
+    return await this.update({
+      display_name: opts['displayName'],
+      profile_setup: new Date(),
+    })
   }
 }

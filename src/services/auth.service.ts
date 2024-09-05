@@ -1,6 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {Storage} from '@ionic/storage-angular';
 import type {Session, User, WeakPassword} from '@supabase/supabase-js';
+import {LogService} from './log.service';
 import {SupabaseService} from './supabase.service';
 import {UserService} from './user.service';
 
@@ -27,7 +28,7 @@ export class AuthService {
       const tokens = data.session;
       const user = data.user;
       await Promise.all([
-        await this.#userSvc.fetchUserProfile(user.id),
+        await this.#userSvc.get(user.id),
         await this.setTokens(tokens.access_token, tokens.refresh_token)
       ]);
     }
@@ -48,7 +49,7 @@ export class AuthService {
       const tokens = data.session;
       const user = data.user;
       await Promise.all([
-        await this.#userSvc.fetchUserProfile(user.id),
+        await this.#userSvc.get(user.id),
         await this.setTokens(tokens.access_token, tokens.refresh_token)
       ]);
     }
@@ -75,18 +76,18 @@ export class AuthService {
 
         if (error) {
           if (error.message.includes("Invalid Refresh Token")) {
-            console.warn('[auth.service.restoreSession] Refresh token is invalid, redirecting to sign-in');
+            LogService.warn('Refresh token is invalid, redirecting to sign-in', 'auth.service.restoreSession')
             await this.clearTokens();
           } else {
-            console.error('[auth.service.restoreSession] Session restoration failed:', error);
+            LogService.error('Session restoration failed:', 'auth.service.restoreSession', error);
             throw error;
           }
         } else {
-          console.log('[auth.service.restoreSession] Session restored:', data.session);
+          LogService.log('Session restored:', 'auth.service.restoreSession', data.session);
           await this.setTokens(accessToken, refreshToken)
         }
-      } catch (e) {
-        console.error('[auth.service.restoreSession] Unexpected error:', e);
+      } catch (error) {
+        LogService.error('Unexpected error:', 'auth.service.restoreSession', error);
       }
     }
   }
@@ -94,15 +95,6 @@ export class AuthService {
   public async getCurrentUser(): Promise<User | null> {
     const userRes = await this.#supaSvc.client.auth.getUser();
     return userRes.data.user;
-  }
-
-  public async doesEmailExist(email: string): Promise<boolean> {
-    const {data, error} = await this.#supaSvc.client
-      .from('auth.users')
-      .select('id')
-      .eq('email', email);
-    if (error) throw error;
-    return data && data.length > 0;
   }
 
   private async getTokens(): Promise<{accessToken: string; refreshToken: string;}> {

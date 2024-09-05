@@ -4,16 +4,7 @@
 Echo is a unique platform that redefines how you document and share your travel experiences. It offers a different approach to social media akin to messages from dark souls, allowing you to say, "I've been there too" while leaving your mark on the world.
 
 #### Core Concepts
-Echo emphasizes the idea of leaving your mark. Instead of immediate posting, Echo introduces a 24-hour delay before your location-based posts are shared. This delay not only adds anticipation but also enhances security.
-
-### Key Features
-**Post an Echo**: Capture the essence of your current location, from breathtaking views to hidden gems and recommendations, and link a song to enhance the moment.
-
-**Delayed Sharing**: After posting, your Echo becomes visible 24 hours later, embodying the idea of an "echo" and ensuring security in sharing.
-
-**Echo Feed**: Explore Echos from around the world or filter by your followers and locations, each echo accompanied by the story and music behind the moment.
-
-**Echo Map**: An interactive map where you can discover where Echos are being posted globally, creating a visual journey of shared experiences.
+Echo emphasizes the idea of leaving your mark. Instead of immediate gratiture, echo leans more towards the idea of placing your flag pole and leaving it behind for others to see.
 
 ## What's in the Stack?
 With Echo, the stack is designed with an emphasis on cross-platform compatibility, maintainability, and adaptability. This will allows us to deliver a seamless and consistent user experience across different devices while keeping our codebase clean and efficient. Below are the key technologies we will use:
@@ -27,17 +18,25 @@ With Echo, the stack is designed with an emphasis on cross-platform compatibilit
     - `ionic cap build ios`
     - `ionic cap build android`
 
-- **Config Based Dev**: Our approach to development should be highly configurable, allowing us to toggle features on or off as needed. This makes it easy to tailor the app to our needs and rapidly deploy updates or new features. Here's an [intro](https://medium.com/captech-corner/an-intro-to-configuration-driven-development-cdd-48a1c088baa9) which'll cover the basics.
-
 - [**Pug**](https://pugjs.org/api/getting-started.html): We use Pug as our templating language for its ability to integrate JavaScript directly into templates. Pug’s mixins feature is particularly powerful, enabling us to reduce redundant code and maintain cleaner, more efficient templates.
+
+- [**Supabase**](https://github.com/supabase/supabase): We use Supabase as our codeless backend, this opensource alternative allows us to easily run locally and host live data.
 
 Our tech stack is carefully chosen to ensure Echo remains a dynamic, user-friendly platform that evolves with the needs of our global community.
 
 ## How to get Started?
-As a pre-requisite it's best to read up on the [Ionic Getting Started Guide](https://ionicframework.com/docs/developing/starting) to introduce yourself to a lot of the concepts I mention here, once you've done that getting started should be as simple as cloning the repo and installing all deps:
+Just a heads up - these instructions are all written by a mac user, these may differ platform to platform. As a general pre-requisite it's best to read up on the [Ionic Getting Started Guide](https://ionicframework.com/docs/developing/starting) to introduce yourself to a lot of the concepts I mention here, once you've done that getting started should be as simple as cloning the repo and installing all deps:
 ```
 npm ci --legacy-peer-deps
 ```
+
+### Getting Started with Supabase
+To set up the backend for `Echo` using Supabase, follow these steps. Adjustments may be needed for other platforms.
+
+- Install Supabase CLI: Ensure you have Node.js installed. Then, you can install the Supabase CLI globally via npm or brew: `brew install supabase/tap/supabase`.
+- Log in to Supabase: Authenticate your CLI with your Supabase account: `supabase login`.
+- Initialize a New Supabase Project: Create a new directory for your project, navigate to it, and run: `supabase init`.
+- Start the Supabase Local Development Environment: To begin using Supabase locally, run: `supabase start`
 
 ### To run through Web Browser
 Run through `ionic serve` which should load up a web browser window and give you the ability to live reload.
