@@ -7,7 +7,7 @@ import {AbstractGuard} from './abstract.guard';
 @Injectable({providedIn: 'root'})
 export class AllowIfNotUser extends AbstractGuard {
   protected redirectUrl(user: userProfile | null): UrlTree | true {
-    return user ? this.router.createUrlTree(['/home']) : true;
+    return user ? this.router.createUrlTree(['/tabs']) : true;
   }
 }
 
@@ -15,6 +15,6 @@ export class AllowIfNotUser extends AbstractGuard {
 @Injectable({providedIn: 'root'})
 export class AllowIfUser extends AbstractGuard {
   protected redirectUrl(user: userProfile | null): UrlTree | true {
-    return user ? true : this.router.createUrlTree(['/sign-in']);
+    return user ? true : this.router.createUrlTree(['/auth/sign-in']);
   }
 }

@@ -8,5 +8,4 @@
  * when you need to pass around an object that can contain any number of dynamic properties.
  */
 
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 type GenericObject<T> = {[key: string]: T};

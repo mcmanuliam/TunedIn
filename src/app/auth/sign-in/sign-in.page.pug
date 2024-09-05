@@ -1,0 +1,17 @@
+abstract-auth-page([heading]="heading", [description]="description").ion-page
+    form((ngSubmit)='onSubmit()', #signInForm='ngForm')
+        .mt-4.mb-5
+            ion-item.mb-2
+                ion-label([position]="'floating'") Email
+                ion-input([(ngModel)]='value.email', id='email', [type]="'email'", name='email', aria-label='Email', required)
+
+            ion-item.mb-2
+                ion-label([position]="'floating'") Password
+                ion-input([(ngModel)]='value.password', id='password', [type]="'password'", name='password', aria-label='Password', required)
+                    ion-input-password-toggle(slot="end", color="light")
+        .text-center
+            ion-button.continue.mb-3(type='submit', shape='round', [disabled]="signInForm.invalid || busy")
+                .btn-text Sign In
+
+            .small((click)='navToSignUp()') Don't have an account?&nbsp;
+                a Sign Up.

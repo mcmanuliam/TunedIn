@@ -1,23 +1,21 @@
 import type {Routes} from '@angular/router';
-import {NonAuthGuard} from 'src/guards/non-auth.guard';
-import {AuthGuard} from '../guards/auth.guard';
-import {AuthPage} from './auth/auth.page';
-import {HomePage} from './home/home.page';
+import {AllowIfProfileSetup} from '../guards/profile-setup.guard';
+import {AllowIfUser} from '../guards/user.guard';
+import {TabsPage} from './tabs/tabs.page';
 
 export const routes: Routes = [
   {
-    canActivate: [NonAuthGuard],
-    component: HomePage,
-    path: 'home',
+    loadChildren: () => import('./auth/auth-routing.module').then(m => m.AuthRoutingModule),
+    path: 'auth',
   },
   {
-    canActivate: [AuthGuard],
-    component: AuthPage,
-    path: 'auth',
+    canActivate: [AllowIfUser, AllowIfProfileSetup],
+    component: TabsPage,
+    path: 'tabs',
   },
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'auth',
+    redirectTo: '/auth/sign-in',
   },
 ];

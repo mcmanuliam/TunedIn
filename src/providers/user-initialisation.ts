@@ -27,7 +27,7 @@ export function provideUserInitialization(): Provider[] {
           console.warn('[user-initialisation.useFactory] No session user, rerouting to sign-in');
           return;
         }
-        await userSvc.fetchUserProfile(sessionUser.id);
+        await userSvc.get(sessionUser.id);
       },
     },
     {provide: Storage, useValue: storage},

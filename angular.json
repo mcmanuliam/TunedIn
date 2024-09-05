@@ -31,11 +31,13 @@
                 "output": "assets"
               }
             ],
-            "styles": ["src/styles/global.scss", "src/styles/variables.scss"],
+            "styles": ["src/styles/global.scss", "src/styles/util.scss", "src/styles/variables.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
+              "buildOptimizer": "TODO: Remove once a fix is released for https://github.com/ionic-team/ionic-framework/issues/2838",
+              "buildOptimizer": false,
               "budgets": [
                 {
                   "type": "initial",
@@ -106,7 +108,7 @@
                 "output": "assets"
               }
             ],
-            "styles": ["src/styles/global.scss", "src/styles/variables.scss"],
+            "styles": ["src/styles/global.scss", "src/styles/util.scss", "src/styles/variables.scss"],
             "scripts": []
           },
           "configurations": {
