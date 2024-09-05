@@ -25,10 +25,12 @@
     "@angular/router": "^18.0.0",
     "@capacitor/android": "^6.1.2",
     "@capacitor/app": "6.0.1",
+    "@capacitor/assets": "^3.0.5",
     "@capacitor/core": "6.1.2",
     "@capacitor/haptics": "6.0.1",
     "@capacitor/ios": "^6.1.2",
     "@capacitor/keyboard": "6.0.2",
+    "@capacitor/splash-screen": "^6.0.2",
     "@capacitor/status-bar": "6.0.1",
     "@ionic/storage-angular": "^4.0.0",
     "ionicons": "^7.2.1",
@@ -83,5 +85,13 @@
       "@supabase/auth-js": "2.61.0"
     }
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "browserslist": [
+    "Chrome >=79",
+    "ChromeAndroid >=79",
+    "Firefox >=70",
+    "Edge >=79",
+    "Safari >=14",
+    "iOS >=14"
+  ]
 }
