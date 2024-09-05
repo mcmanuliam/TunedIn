@@ -30,6 +30,17 @@
     src: url('../assets/fonts/Inter.ttf') format('truetype'),
 }
 
+/* Fix issue with ion footer not disapearing on route change*/
+ion-footer {
+    left: 0;
+    bottom: 0;
+    position: absolute;
+}
+
+a {
+    text-decoration: none;
+}
+
 /* CSS rules */
 .text-heading {
     text-transform: uppercase;

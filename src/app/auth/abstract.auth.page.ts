@@ -1,21 +1,42 @@
 import {CommonModule} from '@angular/common';
-import {Component, Input} from '@angular/core';
-import {IonContent} from '@ionic/angular/standalone';
+import type {OnInit} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
+import {Keyboard} from '@capacitor/keyboard';
+import {IonContent, IonFooter, IonToolbar} from '@ionic/angular/standalone';
+import {PlatformTypeService} from '../../services/platform-type.service';
 
 @Component({
   imports: [
     CommonModule,
     IonContent,
+    IonFooter,
+    IonToolbar,
   ],
   selector: 'abstract-auth-page',
   standalone: true,
   styleUrls: ['./abstract.auth.page.scss'],
   templateUrl: './abstract.auth.page.pug',
 })
-export class AbstractAuthPage {
+export class AbstractAuthPage implements OnInit {
   @Input()
   public heading: string = 'Lorem Ipsum';
 
   @Input()
   public description: string = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+
+  public isKeyboardVisible = false;
+
+  readonly #platformSvc = inject(PlatformTypeService)
+
+  public ngOnInit(): void {
+    if (this.#platformSvc.isPlatformNative){
+      Keyboard.addListener('keyboardWillShow', () => {
+        this.isKeyboardVisible = true;
+      }).catch(console.error);
+
+      Keyboard.addListener('keyboardWillHide', () => {
+        this.isKeyboardVisible = false;
+      }).catch(console.error);
+    }
+  }
 }
