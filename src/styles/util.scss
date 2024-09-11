@@ -42,6 +42,8 @@ $percentage-breakpoints: (
 $base: 1rem;
 
 $font-sizes: (
+  xxsmall: $base * 0.7,
+  xsmall: $base * 0.8,
   small: $base * 0.875,
   medium: $base,
   large: $base * 1.25,

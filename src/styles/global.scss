@@ -30,6 +30,8 @@
     src: url('../assets/fonts/Inter.ttf') format('truetype'),
 }
 
+/* CSS rules */
+
 /* Fix issue with ion footer not disapearing on route change*/
 ion-footer {
     left: 0;
@@ -37,11 +39,14 @@ ion-footer {
     position: absolute;
 }
 
+ion-toolbar, ion-tab-bar {
+    --background: var(--ion-navbar-color);
+}
+
 a {
     text-decoration: none;
 }
 
-/* CSS rules */
 .text-heading {
     text-transform: uppercase;
     font-weight: var(--echo-weight-boldest);
