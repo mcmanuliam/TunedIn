@@ -1,0 +1,9 @@
+header
+ion-content([fullscreen]='true').ion-padding
+    ion-thumbnail(*ngFor='let number of [].constructor(3)').w-100.h-75.mb-3
+        ion-skeleton-text.image([animated]='true')
+
+    div(*ngFor='let number of [].constructor(3)')
+        img(src='../assets/images/image2.png').w-100.h-75.mb-3
+        img(src='../assets/images/image1.png').w-100.h-75.mb-3
+
