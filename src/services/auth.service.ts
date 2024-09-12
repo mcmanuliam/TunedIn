@@ -1,6 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {Storage} from '@ionic/storage-angular';
 import type {Session, User, WeakPassword} from '@supabase/supabase-js';
+import {StoreNames} from '../util/store-names.enum';
 import {LogService} from './log.service';
 import {SupabaseService} from './supabase.service';
 import {UserService} from './user.service';
@@ -60,11 +61,12 @@ export class AuthService {
     await Promise.all([
       await this.#supaSvc.client.auth.signOut(),
       await this.clearTokens(),
+      await this.#storage.remove(StoreNames.SESSION_STATE),
     ]);
   }
 
   /* Restores the user session by retrieving tokens from storage and setting the session in Supabase. */
-  public async restoreSession() {
+  public async restoreSession(): Promise<void> {
     const {accessToken, refreshToken} = await this.getTokens();
 
     if (accessToken && refreshToken) {
@@ -93,29 +95,36 @@ export class AuthService {
   }
 
   public async getCurrentUser(): Promise<User | null> {
-    const userRes = await this.#supaSvc.client.auth.getUser();
-    return userRes.data.user;
+    try {
+      const sessionRes = await this.#supaSvc.client.auth.getUser();
+      await this.#storage.set(StoreNames.SESSION_STATE, sessionRes)
+      return sessionRes.data.user;
+    } catch (error) {
+      LogService.error('Failed to get Current User, fetching from local:', 'auth.service.getCurrentUser', error);
+      const localSessionRes = await this.#storage.get(StoreNames.SESSION_STATE)
+      return localSessionRes.data.user;
+    }
   }
 
   private async getTokens(): Promise<{accessToken: string; refreshToken: string;}> {
     const [accessToken, refreshToken] = await Promise.all([
-      await this.#storage.get('access_token'),
-      await this.#storage.get('refresh_token')
+      await this.#storage.get(StoreNames.ACCESS_TOKEN),
+      await this.#storage.get(StoreNames.REFRESH_TOKEN)
     ])
     return {accessToken, refreshToken};
   }
 
   private async setTokens(accessToken: string, refreshToken: string): Promise<void> {
     await Promise.all([
-      await this.#storage.set('access_token', accessToken),
-      await this.#storage.set('refresh_token', refreshToken)
+      await this.#storage.set(StoreNames.ACCESS_TOKEN, accessToken),
+      await this.#storage.set(StoreNames.REFRESH_TOKEN, refreshToken)
     ])
   }
 
   private async clearTokens(): Promise<void> {
     await Promise.all([
-      await this.#storage.remove('access_token'),
-      await this.#storage.remove('refresh_token')
+      await this.#storage.remove(StoreNames.ACCESS_TOKEN),
+      await this.#storage.remove(StoreNames.REFRESH_TOKEN)
     ])
   }
 }

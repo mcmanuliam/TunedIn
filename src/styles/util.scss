@@ -25,6 +25,8 @@ $spaces: (
 /* Percentage breakpoints */
 $percentage-breakpoints: (
   0: 0,
+  2: 2%,
+  5: 5%,
   10: 10%,
   20: 20%,
   25: 25%,
@@ -42,6 +44,7 @@ $percentage-breakpoints: (
 $base: 1rem;
 
 $font-sizes: (
+  xxxsmall: $base * 0.5,
   xxsmall: $base * 0.7,
   xsmall: $base * 0.8,
   small: $base * 0.875,
@@ -49,6 +52,7 @@ $font-sizes: (
   large: $base * 1.25,
   xlarge: $base * 1.5,
   xxlarge: $base * 2,
+  xxxlarge: $base * 2.5,
 );
 
 /* Define font weights */
@@ -68,7 +72,7 @@ $font-weights: (
 
 /* Generate font-weight classes */
 @each $weight, $value in $font-weights {
-    .fw-#{$weight} {
+    .#{$weight} {
       font-weight: $value !important;
     }
 }
@@ -111,21 +115,26 @@ $varred-widths: ();
 $mappings: (
   /* Margin utilities */
   margin-bottom: (clazz: mb, values: $varred-spacers),
-  margin-left: (clazz: ms, values: $varred-spacers),
-  margin-right: (clazz: me, values: $varred-spacers),
+  margin-left: (clazz: ml, values: $varred-spacers),
+  margin-right: (clazz: mr, values: $varred-spacers),
   margin-top: (clazz: mt, values: $varred-spacers),
   margin-top-bottom: (clazz: mtb, values: $varred-spacers),
+  margin: (clazz: m, values: $varred-spacers),
 
   /* Padding utilities */
   padding-bottom: (clazz: pb, values: $varred-spacers),
-  padding-left: (clazz: ps, values: $varred-spacers),
-  padding-right: (clazz: pe, values: $varred-spacers),
+  padding-left: (clazz: pl, values: $varred-spacers),
+  padding-right: (clazz: pr, values: $varred-spacers),
   padding-top: (clazz: pt, values: $varred-spacers),
   padding-top-bottom: (clazz: ptb, values: $varred-spacers),
+  padding: (clazz: p, values: $varred-spacers),
 
   /* Width utilities */
   max-width: (clazz: mw, values: $percentage-breakpoints),
   width: (clazz: w, values: $percentage-breakpoints),
+  height: (clazz: h, values: $percentage-breakpoints),
+
+  border-radius: (clazz: br, values: $percentage-breakpoints),
 );
 
 /* Generate utility classes */
@@ -151,9 +160,25 @@ $mappings: (
 
 /* CSS Rules */
 .text-center {
-  text-align: center !important;
+  text-align: center;
+}
+
+.verticaly-align-text {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.centre-vertically {
+  display: flex;
+  align-items: center;
 }
 
 .m-a {
   margin: auto;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
 }

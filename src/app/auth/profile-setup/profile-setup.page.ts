@@ -45,7 +45,7 @@ export class ProfileSetupPage implements AbstractFormComponent<IValue> {
     this.#userSvc.finialiseProfile({displayName: this.value.displayName})
       .then(() => {
         this.busy = false;
-        return this.#router.navigate(['/tabs'], {replaceUrl: true})
+        return this.#router.navigate(['/tabs/home'], {replaceUrl: true})
       })
       .catch(error => {
         this.busy = false;
