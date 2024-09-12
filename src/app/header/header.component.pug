@@ -1,0 +1,13 @@
+ion-header([translucent]="true")
+    ion-toolbar
+        .flex-space-between.p-3
+            div.w-100
+                .text-heading.xxlarge.mb-1 ECHO
+                span.w-100
+                    ion-icon.large.verticaly-align-text(name='navigate-circle')
+                    .medium.verticaly-align-text.w-60.ml-2
+                        ion-skeleton-text.text([animated]="true", *ngIf="loading")
+                        | {{location}}
+
+            .centre-vertically
+                ion-icon.xxxlarge(name='heart-outline')

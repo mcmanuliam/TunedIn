@@ -39,8 +39,27 @@ ion-footer {
     position: absolute;
 }
 
-ion-toolbar, ion-tab-bar {
-    --background: var(--ion-navbar-color);
+ion-toolbar {
+    --border-style: none;
+    --background: var(--ion-background-color);
+}
+
+ion-tab-bar {
+    --background: var(--ion-navbar-background-color);
+}
+
+ion-tab-button {
+    --color: var(--ion-navbar-color);
+    --color-focused: var(--ion-navbar-color-focused);
+    --color-selected: var(--ion-navbar-color-selected);
+}
+
+ion-skeleton-text, .text {
+    --border-radius: 10px
+}
+
+ion-skeleton-text, .image {
+    --border-radius: 20px
 }
 
 a {

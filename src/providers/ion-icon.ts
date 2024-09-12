@@ -5,7 +5,10 @@ import {
   eyeOffOutline,
   eyeOutline,
   helpCircle,
-  warning
+  warning,
+  home,
+  navigateCircle,
+  heartOutline
 } from 'ionicons/icons';
 
 /**
@@ -21,7 +24,10 @@ export function provideIonIcons(): Provider[] {
         addIcons({
           'eye-off-outline': eyeOffOutline,
           'eye-outline:': eyeOutline,
+          'heart-outline': heartOutline,
           'help-circle': helpCircle,
+          home,
+          'navigate-circle': navigateCircle,
           warning,
         });
       },

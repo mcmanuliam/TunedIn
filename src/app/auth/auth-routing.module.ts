@@ -23,6 +23,11 @@ const routes: Routes = [
     component: ProfileSetupPage,
     path: 'profile-setup',
   },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/auth/sign-in',
+  },
 ];
 
 @NgModule({

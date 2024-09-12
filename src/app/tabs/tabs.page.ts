@@ -1,15 +1,15 @@
 import {CommonModule} from '@angular/common';
 import {Component} from '@angular/core';
-import {IonContent, IonTabs, IonLabel} from '@ionic/angular/standalone';
+import {IonTabs, IonTabBar, IonTabButton, IonIcon} from '@ionic/angular/standalone';
 
 @Component({
   imports: [
     CommonModule,
-    IonContent,
     IonTabs,
-    IonLabel,
+    IonTabBar,
+    IonTabButton,
+    IonIcon,
   ],
-  selector: 'abstract-auth-page',
   standalone: true,
   templateUrl: './tabs.page.pug'
 })

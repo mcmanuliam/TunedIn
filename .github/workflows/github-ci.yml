@@ -13,7 +13,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -23,7 +22,7 @@ jobs:
       - name: Cache Node.js modules
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
@@ -31,15 +30,41 @@ jobs:
       - name: Create src/config/local.ts
         run: |
           mkdir -p src/config
-          echo "interface ILocalConfig {" > src/config/local.ts
-          echo "  backendKey: string;" >> src/config/local.ts
-          echo "  backendUrl: string;" >> src/config/local.ts
-          echo "}" >> src/config/local.ts
-          echo "" >> src/config/local.ts
-          echo "export const local: ILocalConfig = {" >> src/config/local.ts
-          echo "  backendKey: '${{ secrets.BACKEND_KEY }}'," >> src/config/local.ts
-          echo "  backendUrl: '${{ secrets.BACKEND_URL }}'," >> src/config/local.ts
-          echo "};" >> src/config/local.ts
+          cat <<EOL > src/config/local.ts
+          /**
+           * local.ts
+           *
+           * This file is used to store sensitive information such as API keys and URLs
+           * that should not be committed to version control. By keeping this data in
+           * local.ts, we ensure that these credentials remain secure and are only available
+           * in the local development environment.
+           *
+           * The values defined in this file are merged into the environment configuration
+           * files (environment.ts and environment.prod.ts) to be used throughout the application.
+           *
+           * IMPORTANT:
+           * - Do not commit this file to the repository.
+           * - Make sure this file is listed in your .gitignore to avoid accidental commits.
+           */
+
+          interface ILocalConfig {
+            backendKey: string,
+
+            googleMapsKey: string,
+
+            backendUrl: string,
+          }
+
+          export const local: ILocalConfig = {
+            /* Server Backend Key */
+            backendKey: '${{ secrets.BACKEND_KEY }}',
+
+            /* Server Backend URL */
+            backendUrl: '${{ secrets.BACKEND_URL }}',
+
+            googleMapsKey: '${{ secrets.GOOGLE_MAPS_KEY }}',
+          };
+          EOL
 
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
@@ -50,14 +75,11 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
-  # Job to build and run the iOS app
   build-ios:
     runs-on: macos-latest
     needs: build
-
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -70,15 +92,41 @@ jobs:
       - name: Create src/config/local.ts
         run: |
           mkdir -p src/config
-          echo "interface ILocalConfig {" > src/config/local.ts
-          echo "  backendKey: string;" >> src/config/local.ts
-          echo "  backendUrl: string;" >> src/config/local.ts
-          echo "}" >> src/config/local.ts
-          echo "" >> src/config/local.ts
-          echo "export const local: ILocalConfig = {" >> src/config/local.ts
-          echo "  backendKey: '${{ secrets.BACKEND_KEY }}'," >> src/config/local.ts
-          echo "  backendUrl: '${{ secrets.BACKEND_URL }}'," >> src/config/local.ts
-          echo "};" >> src/config/local.ts
+          cat <<EOL > src/config/local.ts
+          /**
+           * local.ts
+           *
+           * This file is used to store sensitive information such as API keys and URLs
+           * that should not be committed to version control. By keeping this data in
+           * local.ts, we ensure that these credentials remain secure and are only available
+           * in the local development environment.
+           *
+           * The values defined in this file are merged into the environment configuration
+           * files (environment.ts and environment.prod.ts) to be used throughout the application.
+           *
+           * IMPORTANT:
+           * - Do not commit this file to the repository.
+           * - Make sure this file is listed in your .gitignore to avoid accidental commits.
+           */
+
+          interface ILocalConfig {
+            backendKey: string,
+
+            googleMapsKey: string,
+
+            backendUrl: string,
+          }
+
+          export const local: ILocalConfig = {
+            /* Server Backend Key */
+            backendKey: '${{ secrets.BACKEND_KEY }}',
+
+            /* Server Backend URL */
+            backendUrl: '${{ secrets.BACKEND_URL }}',
+
+            googleMapsKey: '${{ secrets.GOOGLE_MAPS_KEY }}',
+          };
+          EOL
 
       - name: Build the project for iOS
         run: |
@@ -91,51 +139,3 @@ jobs:
 
       - name: Build iOS App
         run: npx ionic cap build ios --no-open
-
-  # fix[md]: Remove android #17
-  # TOOD: In the case android is added back uncomment.
-
-  # Job to build and run the Android app
-  # build-android:
-  #   runs-on: ubuntu-latest
-  #   needs: build
-
-  #   steps:
-  #     - uses: actions/checkout@v4
-
-  #     - name: Set up Node.js
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: '18.19'
-  #         cache: 'npm'
-
-  #     - name: Install dependencies
-  #       run: npm ci --legacy-peer-deps
-
-  #     - name: Create src/config/local.ts
-  #       run: |
-  #         mkdir -p src/config
-  #         echo "interface ILocalConfig {" > src/config/local.ts
-  #         echo "  backendKey: string;" >> src/config/local.ts
-  #         echo "  backendUrl: string;" >> src/config/local.ts
-  #         echo "}" >> src/config/local.ts
-  #         echo "" >> src/config/local.ts
-  #         echo "export const local: ILocalConfig = {" >> src/config/local.ts
-  #         echo "  backendKey: '${{ secrets.BACKEND_KEY }}'," >> src/config/local.ts
-  #         echo "  backendUrl: '${{ secrets.BACKEND_URL }}'," >> src/config/local.ts
-  #         echo "};" >> src/config/local.ts
-
-  #     - name: Build the project for Android
-  #       run: |
-  #         npm run build
-  #         npx ionic cap copy android
-  #         npx ionic cap sync android
-
-  #     - name: Set up JDK
-  #       uses: actions/setup-java@v3
-  #       with:
-  #         distribution: 'zulu'
-  #         java-version: '17'
-
-  #     - name: Build Android App
-  #       run: npx ionic cap build android --no-open
