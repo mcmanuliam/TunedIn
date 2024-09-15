@@ -3,7 +3,7 @@ import {Injectable, inject} from '@angular/core';
 import {Geolocation} from '@capacitor/geolocation';
 import {Storage} from '@ionic/storage-angular';
 import {environment} from '../environments/environment';
-import {StoreNames} from '../util/store-names.enum';
+import {StoreNames} from '../util/enums/store-names.enum';
 import {LogService} from './log.service';
 
 @Injectable({

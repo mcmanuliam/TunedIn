@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {Storage} from '@ionic/storage-angular';
 import type {Session, User, WeakPassword} from '@supabase/supabase-js';
-import {StoreNames} from '../util/store-names.enum';
+import {StoreNames} from '../util/enums/store-names.enum';
 import {LogService} from './log.service';
 import {SupabaseService} from './supabase.service';
 import {UserService} from './user.service';

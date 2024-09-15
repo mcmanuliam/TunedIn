@@ -1,0 +1,26 @@
+.buttons.m-2
+    ion-button.reaction(
+        *ngIf='!value',
+        type='button',
+        (click)='triggerFileInput()',
+        [disabled]='busy',
+    )
+        .emoji {{reaction.value}}
+
+    .uploaded(*ngIf='value')
+        .emoji-uploaded {{reaction.value}}
+        ion-button.clear((click)='this.value = ""', size="small", [disabled]='busy')
+            ion-icon(slot="icon-only", name='close-outline')
+        ion-button.reaction(
+            type='button',
+            [disabled]='busy',
+        )
+            img.image([src]='value')
+
+input(
+    type='file',
+    accept='image/*',
+    (change)='onFileSelected($event)',
+    aria-label='profile_image',
+    [id]='inputId',
+)
