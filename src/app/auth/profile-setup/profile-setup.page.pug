@@ -1,9 +1,19 @@
 abstract-auth-page([heading]="heading", [description]="description").ion-page
     form((ngSubmit)='onSubmit()', #profileSetupForm='ngForm')
-        .mt-4.mb-5
-            ion-item.mb-2
+        .mtb-5
+            ion-item.mb-5
                 ion-label([position]="'floating'") Display Name
                 ion-input([(ngModel)]='value.displayName', id='displayName', name='display_name', aria-label='display_name', required)
+
+            .text-center
+                .xsmall.mb-2 Upload your Reactions
+                reaction-uploader(
+                    *ngFor='let reaction of reactions | keyvalue',
+                    [reaction]='reaction',
+                    [(ngModel)]='value.reactions[reaction.key]',
+                    id='reaction.key + "-uploader"',
+                    name='reaction.key + "-uploader"'
+                )
 
         .text-center
             ion-button.continue.mb-3(type='submit', shape='round', [disabled]="profileSetupForm.invalid || busy")

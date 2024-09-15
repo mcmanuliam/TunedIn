@@ -6,9 +6,9 @@ import {IonInput, IonLabel, IonItem, IonButton, IonInputPasswordToggle} from '@i
 import {AuthService} from '../../../services/auth.service';
 import {LogService} from '../../../services/log.service';
 import {ToastService} from '../../../services/toast.service';
+import {ErrorMessages} from '../../../util/enums/error-message.enum';
+import type {AbstractFormComponent} from '../../components/abstract.form.component';
 import {AbstractAuthPage} from '../abstract.auth.page';
-import type {AbstractFormComponent} from '../abstract.form.component';
-import {ErrorMessages} from './../../../util/error-message.enum';
 
 interface IValue {
   email: string,

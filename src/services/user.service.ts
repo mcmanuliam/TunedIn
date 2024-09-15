@@ -1,6 +1,7 @@
 import {inject, Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
-import type {userProfile} from "../models/user";
+import type {IUserProfile} from "../models/user";
+import {TableNames} from "../util/enums/table-names.enum";
 import {LogService} from "./log.service";
 import {SupabaseService} from "./supabase.service";
 
@@ -10,15 +11,15 @@ import {SupabaseService} from "./supabase.service";
 export class UserService {
   readonly #supaSvc = inject(SupabaseService);
 
-  #userSubject = new BehaviorSubject<userProfile | null>(null);
+  #userSubject = new BehaviorSubject<IUserProfile | null>(null);
 
   public user$ = this.#userSubject.asObservable();
 
-  public set user(user: userProfile | null) {
+  public set user(user: IUserProfile | null) {
     this.#userSubject.next(user);
   }
 
-  public get user(): userProfile | null {
+  public get user(): IUserProfile | null {
     return this.#userSubject.getValue();
   }
 
@@ -31,9 +32,9 @@ export class UserService {
     this.#userSubject.next(null);
   }
 
-  public async get(userId?: string): Promise<userProfile | null> {
+  public async get(userId?: string): Promise<IUserProfile | null> {
     const {data, error} = await this.#supaSvc.client
-      .from('profiles')
+      .from(TableNames.PROFILES)
       .select('*')
       .eq('id', userId ?? this.user?.id)
       .single();
@@ -43,13 +44,13 @@ export class UserService {
       return null;
     }
 
-    this.user = data as userProfile;
+    this.user = data as IUserProfile;
     return this.user;
   }
 
-  public async update(opts: GenericObject<any>, userId?: string): Promise<userProfile | null> {
+  public async update(opts: GenericObject<any>, userId?: string): Promise<IUserProfile | null> {
     const {error} = await this.#supaSvc.client
-      .from('profiles')
+      .from(TableNames.PROFILES)
       .update(opts)
       .eq('id', userId ?? this.user?.id)
       .single();
@@ -59,13 +60,13 @@ export class UserService {
       return null;
     }
 
-    this.user = {...this.user, ...opts} as userProfile;
+    this.user = {...this.user, ...opts} as IUserProfile;
     return this.user;
   }
 
-  public async finialiseProfile(opts: GenericObject<any>): Promise<userProfile | null> {
+  public async finialiseProfileSetup(displayName: string): Promise<IUserProfile | null> {
     return await this.update({
-      display_name: opts['displayName'],
+      display_name: displayName,
       profile_setup: new Date(),
     })
   }

@@ -2,7 +2,7 @@ import {CommonModule} from '@angular/common';
 import type {OnInit} from '@angular/core';
 import {Component, inject} from '@angular/core';
 import {IonHeader, IonToolbar, IonIcon, IonSkeletonText} from '@ionic/angular/standalone';
-import {LocationService} from 'src/services/location.service';
+import {LocationService} from '../../services/location.service';
 
 @Component({
   imports: [

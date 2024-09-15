@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import type {CanActivate, UrlTree} from '@angular/router';
 import type {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import type {userProfile} from 'src/models/user';
+import type {IUserProfile} from '../models/user';
 import {UserService} from '../services/user.service';
 
 /**
@@ -17,7 +17,7 @@ export abstract class AbstractGuard implements CanActivate {
 
   protected readonly router = inject(Router);
 
-  protected abstract redirectUrl(user: userProfile | null): UrlTree | true;
+  protected abstract redirectUrl(user: IUserProfile | null): UrlTree | true;
 
   public canActivate(): Observable<true | UrlTree> {
     return this.userSvc.user$.pipe(

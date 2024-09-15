@@ -1,7 +1,9 @@
-export interface userProfile {
+import type {IReactions} from "./reactions";
+
+export interface IUserProfile {
     id: string,
 
-    created_at: string,
+    created_at: Date,
 
     first_name?: string,
 
@@ -11,5 +13,9 @@ export interface userProfile {
 
     email?: string,
 
-    profile_setup: boolean,
+    profile_setup: Date,
+}
+
+export interface IFullUserProfile extends IUserProfile {
+    reactions: IReactions,
 }

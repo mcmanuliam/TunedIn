@@ -8,7 +8,8 @@ import {
   warning,
   home,
   navigateCircle,
-  heartOutline
+  heartOutline,
+  closeOutline
 } from 'ionicons/icons';
 
 /**
@@ -22,6 +23,7 @@ export function provideIonIcons(): Provider[] {
       provide: APP_INITIALIZER,
       useFactory: () => () => {
         addIcons({
+          'close-outline': closeOutline,
           'eye-off-outline': eyeOffOutline,
           'eye-outline:': eyeOutline,
           'heart-outline': heartOutline,
