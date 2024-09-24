@@ -8,13 +8,13 @@ input {
     --background-hover: var(--ion-button-background-hover);
     --background-activated: var(--ion-button-background-active);
     --border-style: solid;
-    --padding-top: var(--echo-space-0);
-    --padding-bottom: var(--echo-space-0);
-    --padding-start: var(--echo-space-0);
-    --padding-end: var(--echo-space-0);
-    --border-radius: var(--echo-width-50);
+    --padding-top: var(--tune-space-0);
+    --padding-bottom: var(--tune-space-0);
+    --padding-start: var(--tune-space-0);
+    --padding-end: var(--tune-space-0);
+    --border-radius: var(--tune-width-50);
     --border-width: 1px;
-    font-size: var(--echo-font-size-xxlarge);
+    font-size: var(--tune-font-size-xxlarge);
     --border-color: var(--ion-button-border);
     min-height: auto;
     width: 4rem;
@@ -25,14 +25,14 @@ input {
     --background-focused: var(--ion-button-background-hover);
     --background-hover: var(--ion-button-background-hover);
     --background-activated: var(--ion-button-background-active);
-    --border-color: var(--ion-button-border);
-    --border-radius: var(--echo-width-50);
+    --border-color: var(--ion-background-color);
+    --border-radius: var(--tune-width-50);
     --border-style: solid;
-    --border-width: 1px;
+    --border-width: 2px;
     position: absolute;
     z-index: 1000;
-    top: calc(var(--echo-space-2) * -1);
-    right: calc(var(--echo-space-2) * -1);
+    top: calc(var(--tune-space-2) * -1);
+    right: calc(var(--tune-space-2) * -1);
     ion-icon { color: white; }
 }
 
@@ -42,22 +42,23 @@ input {
     height: 4rem;
     position: relative;
     .reaction {
-        --border-color: var(--ion-button-border-uploaded);
+        --border-width: 2px;
+        --border-color: var(--ion-accent-color);
     }
 }
 
 .emoji-uploaded {
     display: inline-block;
-    font-size: var(--echo-font-size-xxlarge);
+    font-size: var(--tune-font-size-xxlarge);
     z-index: 1000;
     position: absolute;
     bottom: 0;
     left: 0;
-    line-height: var(--echo-space-2);
+    line-height: var(--tune-space-2);
 }
 
 .emoji {
-    padding: var(--echo-space-3);
+    padding: var(--tune-space-3);
 }
 
 .image {

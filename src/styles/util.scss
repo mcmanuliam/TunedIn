@@ -80,35 +80,35 @@ $font-weights: (
 /*
  * Generate CSS variables for spacers, fonts and breakpoints.
  * These will be accessed through:
- *   var(--echo-space-...)
- *   var(--echo-width-...)
- *   var(--echo-weight-...)
- *   var(--echo-font-size-...)
+ *   var(--tune-space-...)
+ *   var(--tune-width-...)
+ *   var(--tune-weight-...)
+ *   var(--tune-font-size-...)
  */
 :root {
     @each $k, $space in $spaces {
-      --echo-space-#{$k}: #{$space};
+      --tune-space-#{$k}: #{$space};
     }
     @each $k, $width in $percentage-breakpoints {
-      --echo-width-#{$k}: #{$width};
+      --tune-width-#{$k}: #{$width};
     }
     @each $k, $width in $font-weights {
-      --echo-weight-#{$k}: #{$width};
+      --tune-weight-#{$k}: #{$width};
     }
     @each $k, $width in $font-sizes {
-      --echo-font-size-#{$k}: #{$width};
+      --tune-font-size-#{$k}: #{$width};
     }
   }
 
 /* Map to hold references to CSS variables for spacers */
 $varred-spacers: ();
 @each $k in map.keys($spaces) {
-  $varred-spacers: map.set($varred-spacers, $k, var(--echo-space-#{$k}));
+  $varred-spacers: map.set($varred-spacers, $k, var(--tune-space-#{$k}));
 }
 
 $varred-widths: ();
 @each $k in map.keys($percentage-breakpoints) {
-  $varred-widths: map.set($varred-widths, $k, var(--echo-width-#{$k}));
+  $varred-widths: map.set($varred-widths, $k, var(--tune-width-#{$k}));
 }
 
 /* mappings for generating utility classes */
@@ -181,4 +181,8 @@ $mappings: (
 .flex-space-between {
   display: flex;
   justify-content: space-between;
+}
+
+.danger {
+  color: var(--ion-color-danger)
 }

@@ -1,0 +1,13 @@
+.profile-pic {
+    margin-top: var(--tune-space-5);
+    border-color: var(--ion-button-border);
+    width: var(--tune-width-30);
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.settings {
+    position: absolute;
+    right: var(--tune-space-4);
+}

@@ -3,4 +3,6 @@ export const enum StoreNames {
     REFRESH_TOKEN = 'refresh_token',
     SESSION_STATE = 'session_state',
     CACHED_LOCATION = 'cached_location',
+    USER = 'user',
+    REACTIONS = 'reactions',
 }

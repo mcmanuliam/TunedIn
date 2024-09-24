@@ -21,12 +21,21 @@ export const routes: Routes = [
         component: FeedPage,
         path: 'home',
       },
+      {
+        loadChildren: () => import('./profile/profile-routing.module').then(m => m.ProfileRoutingModule),
+        path: 'profile',
+      },
     ],
     component: TabsPage,
     path: 'tabs',
   },
   {
     path: '',
+    pathMatch: 'full',
+    redirectTo: '/auth/sign-in',
+  },
+  {
+    path: '**',
     pathMatch: 'full',
     redirectTo: '/auth/sign-in',
   },

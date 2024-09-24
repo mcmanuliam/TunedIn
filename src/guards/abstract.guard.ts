@@ -13,14 +13,14 @@ import {UserService} from '../services/user.service';
  */
 @Injectable({providedIn: 'root'})
 export abstract class AbstractGuard implements CanActivate {
-  protected readonly userSvc = inject(UserService);
+  readonly #userSvc = inject(UserService);
 
   protected readonly router = inject(Router);
 
   protected abstract redirectUrl(user: IUserProfile | null): UrlTree | true;
 
   public canActivate(): Observable<true | UrlTree> {
-    return this.userSvc.user$.pipe(
+    return this.#userSvc.user$.pipe(
       map(user => this.redirectUrl(user))
     );
   }

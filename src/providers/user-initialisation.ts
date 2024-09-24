@@ -28,7 +28,8 @@ export function provideUserInitialization(): Provider[] {
           return;
         }
         await userSvc.get(sessionUser.id);
-      },
+        return;
+      }
     },
     {provide: Storage, useValue: storage},
   ];

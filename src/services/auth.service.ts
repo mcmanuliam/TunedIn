@@ -30,7 +30,7 @@ export class AuthService {
       const user = data.user;
       await Promise.all([
         await this.#userSvc.get(user.id),
-        await this.setTokens(tokens.access_token, tokens.refresh_token)
+        await this.#setTokens(tokens.access_token, tokens.refresh_token)
       ]);
     }
     return data;
@@ -51,17 +51,20 @@ export class AuthService {
       const user = data.user;
       await Promise.all([
         await this.#userSvc.get(user.id),
-        await this.setTokens(tokens.access_token, tokens.refresh_token)
+        await this.#setTokens(tokens.access_token, tokens.refresh_token)
       ]);
     }
     return data;
   }
 
   public async signOut(): Promise<void> {
+    this.#userSvc.empty()
     await Promise.all([
       await this.#supaSvc.client.auth.signOut(),
-      await this.clearTokens(),
+      await this.#clearTokens(),
       await this.#storage.remove(StoreNames.SESSION_STATE),
+      await this.#storage.remove(StoreNames.USER),
+      await this.#storage.remove(StoreNames.REACTIONS),
     ]);
   }
 
@@ -79,14 +82,14 @@ export class AuthService {
         if (error) {
           if (error.message.includes("Invalid Refresh Token")) {
             LogService.warn('Refresh token is invalid, redirecting to sign-in', 'auth.service.restoreSession')
-            await this.clearTokens();
+            await this.#clearTokens();
           } else {
             LogService.error('Session restoration failed:', 'auth.service.restoreSession', error);
             throw error;
           }
         } else {
           LogService.log('Session restored:', 'auth.service.restoreSession', data.session);
-          await this.setTokens(accessToken, refreshToken)
+          await this.#setTokens(accessToken, refreshToken)
         }
       } catch (error) {
         LogService.error('Unexpected error:', 'auth.service.restoreSession', error);
@@ -106,7 +109,7 @@ export class AuthService {
     }
   }
 
-  private async getTokens(): Promise<{accessToken: string; refreshToken: string;}> {
+  public async getTokens(): Promise<{accessToken: string; refreshToken: string;}> {
     const [accessToken, refreshToken] = await Promise.all([
       await this.#storage.get(StoreNames.ACCESS_TOKEN),
       await this.#storage.get(StoreNames.REFRESH_TOKEN)
@@ -114,14 +117,14 @@ export class AuthService {
     return {accessToken, refreshToken};
   }
 
-  private async setTokens(accessToken: string, refreshToken: string): Promise<void> {
+  async #setTokens(accessToken: string, refreshToken: string): Promise<void> {
     await Promise.all([
       await this.#storage.set(StoreNames.ACCESS_TOKEN, accessToken),
       await this.#storage.set(StoreNames.REFRESH_TOKEN, refreshToken)
     ])
   }
 
-  private async clearTokens(): Promise<void> {
+  async #clearTokens(): Promise<void> {
     await Promise.all([
       await this.#storage.remove(StoreNames.ACCESS_TOKEN),
       await this.#storage.remove(StoreNames.REFRESH_TOKEN)

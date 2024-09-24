@@ -44,7 +44,7 @@ ion-toolbar {
     --background: var(--ion-background-color);
 }
 
-ion-tab-bar {
+ion-tab-bar, .header {
     --background: var(--ion-navbar-background-color);
 }
 
@@ -68,8 +68,8 @@ a {
 
 .text-heading {
     text-transform: uppercase;
-    font-weight: var(--echo-weight-boldest);
-    font-size: var(--echo-font-size-xxlarge);
+    font-weight: var(--tune-weight-boldest);
+    font-size: var(--tune-font-size-xxlarge);
 }
 
 .continue {
@@ -80,11 +80,11 @@ a {
     --border-color: var(--ion-button-border);
     --border-style: solid;
     --border-width: 1px;
-    width: var(--echo-width-75);
+    width: var(--tune-width-75);
     .btn-text {
         text-transform: uppercase;
-        font-size: var(--echo-font-size-large);
-        font-weight: var(--echo-weight-bolder);
+        font-size: var(--tune-font-size-large);
+        font-weight: var(--tune-weight-bolder);
     }
 }
 

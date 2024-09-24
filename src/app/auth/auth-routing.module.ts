@@ -28,6 +28,11 @@ const routes: Routes = [
     pathMatch: 'full',
     redirectTo: '/auth/sign-in',
   },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: '/auth/sign-in',
+  },
 ];
 
 @NgModule({

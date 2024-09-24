@@ -1,0 +1,11 @@
+ion-header
+    ion-toolbar.header
+      ion-back-button(slot='start')
+      ion-title Settings
+
+ion-content([fullscreen]='true').ion-padding
+  ion-list
+    ion-item
+      .small Account
+
+    ion-item.danger(button (click)='quit()') Sign Out

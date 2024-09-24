@@ -74,7 +74,7 @@ export class SignupPage implements AbstractFormComponent<IValue> {
     try {
       await Promise.all([
         await this.#authSvc.signUp(this.value.email, this.value.password),
-        await this.#router.navigate(['/profile-setup']),
+        await this.#router.navigate(['/auth/profile-setup']),
       ])
     } catch (error: any) {
       this.busy = false

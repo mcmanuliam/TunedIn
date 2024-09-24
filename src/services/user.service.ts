@@ -1,6 +1,9 @@
 import {inject, Injectable} from "@angular/core";
+import {Network} from "@capacitor/network";
+import {Storage} from '@ionic/storage-angular';
 import {BehaviorSubject} from "rxjs";
 import type {IUserProfile} from "../models/user";
+import {StoreNames} from "../util/enums/store-names.enum";
 import {TableNames} from "../util/enums/table-names.enum";
 import {LogService} from "./log.service";
 import {SupabaseService} from "./supabase.service";
@@ -10,6 +13,8 @@ import {SupabaseService} from "./supabase.service";
 })
 export class UserService {
   readonly #supaSvc = inject(SupabaseService);
+
+  readonly #storage = inject(Storage);
 
   #userSubject = new BehaviorSubject<IUserProfile | null>(null);
 
@@ -33,19 +38,27 @@ export class UserService {
   }
 
   public async get(userId?: string): Promise<IUserProfile | null> {
-    const {data, error} = await this.#supaSvc.client
-      .from(TableNames.PROFILES)
-      .select('*')
-      .eq('id', userId ?? this.user?.id)
-      .single();
+    const connection = await Network.getStatus();
 
-    if (error) {
-      LogService.error('Error fetching user profile:', 'user.service.get', error);
-      return null;
+    if (connection) {
+      const {data, error} = await this.#supaSvc.client
+        .from(TableNames.PROFILES)
+        .select('*')
+        .eq('id', userId ?? this.user?.id)
+        .single();
+
+      if (error) {
+        LogService.error('Error fetching user profile:', 'user.service.get', error);
+        return await this.#storage.get(StoreNames.USER);
+      }
+
+      this.user = data as IUserProfile;
+      await this.#storage.set(StoreNames.USER, this.user)
+
+      return this.user;
     }
 
-    this.user = data as IUserProfile;
-    return this.user;
+    return await this.#storage.get(StoreNames.USER)
   }
 
   public async update(opts: GenericObject<any>, userId?: string): Promise<IUserProfile | null> {
@@ -61,6 +74,8 @@ export class UserService {
     }
 
     this.user = {...this.user, ...opts} as IUserProfile;
+    await this.#storage.set(StoreNames.USER, this.user)
+
     return this.user;
   }
 
