@@ -3,11 +3,17 @@ import type {Routes} from '@angular/router';
 import {RouterModule} from '@angular/router';
 import {AllowIfNotProfileSetup} from '../../guards/profile-setup.guard';
 import {AllowIfNotUser, AllowIfUser} from '../../guards/user.guard';
+import {LandingPage} from './landing/landing.page';
 import {ProfileSetupPage} from './profile-setup/profile-setup.page';
 import {SigninPage} from './sign-in/sign-in.page';
 import {SignupPage} from './sign-up/sign-up.page';
 
 const routes: Routes = [
+  {
+    canActivate: [AllowIfNotUser],
+    component: LandingPage,
+    path: 'landing',
+  },
   {
     canActivate: [AllowIfNotUser],
     component: SigninPage,
@@ -26,12 +32,12 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/auth/sign-in',
+    redirectTo: '/auth/landing',
   },
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: '/auth/sign-in',
+    redirectTo: '/auth/landing',
   },
 ];
 

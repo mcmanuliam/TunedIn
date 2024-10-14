@@ -6,11 +6,18 @@
     &::before {
         content: '';
         position: fixed;
-        width: var(--tune-width-100);
-        height: var(--tune-space-10);
+        width: var(--width-100);
+        height: var(--space-10);
         background: linear-gradient(to bottom, var(--ion-background-color), transparent);
         pointer-events: none;
         /* Move this above all other elements*/
         z-index: 1000;
     }
+}
+
+.ion-padding {
+    --padding-end: var(--space-4);
+    --padding-start: var(--space-4);
+    --padding-top: var(--space-4);
+    --padding-bottom: var(--space-4);
 }

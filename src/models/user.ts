@@ -14,6 +14,8 @@ export interface IUserProfile {
     email?: string,
 
     profile_setup: Date,
+
+    profile_picture_url?: string;
 }
 
 export interface IFullUserProfile extends IUserProfile {

@@ -38,5 +38,12 @@ abstract-auth-page([heading]="heading", [description]="description").ion-page
         .text-center
             ion-button.continue.mb-3(type="submit", shape="round", [disabled]="signUpForm.invalid || busy")
                 .btn-text Sign Up
-            .small((click)='navToSignIn()') Already have an account?&nbsp;
-                a Sign In.
+
+            .small.w-75.m-a(*ngIf='!spotifyConf.oauth; else spotify') Already have an Account?&nbsp;
+                a((click)='navToSignIn()') Sign In.&nbsp;
+
+            ng-template(#spotify)
+                .small.w-75.m-a Already have an Account?&nbsp;
+                    a((click)='navToSignIn()') Sign In.&nbsp;
+                    | Or&nbsp;
+                    a((click)='navToLanding()') Sign In with Spotify

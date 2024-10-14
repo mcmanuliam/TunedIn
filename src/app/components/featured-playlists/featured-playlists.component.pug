@@ -1,0 +1,17 @@
+swiper-container(slides-per-view="2")
+    ng-container(*ngIf="isLoading && featuredPlaylists.length === 0")
+        swiper-slide(*ngFor="let skeleton of [1, 2, 3]")
+            ion-skeleton-text.image
+            ion-skeleton-text.skeleton-text.text-heading.xxsmall.mt-2
+
+    ng-container(*ngIf="!isLoading || featuredPlaylists.length > 0")
+        ng-container(*ngFor="let playlist of featuredPlaylists")
+            swiper-slide
+                a([href]="playlist.external_urls.spotify", target="_blank")
+                    img.cover([src]="playlist.images[0].url", [alt]="playlist.name")
+                    .sub-heading.xxsmall.mt-1.overflow {{playlist.name}}
+                    .description.xxxsmall {{playlist.description || 'No description available'}}
+
+    swiper-slide(*ngIf="!isLoading")
+        a(href="https://stackoverflow.com/questions/6810031/css-center-element-within-a-div-element").icon-cover.cover
+            ion-icon.icon.large(name='add-outline')

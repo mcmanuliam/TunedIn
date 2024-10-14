@@ -1,7 +1,8 @@
 import {Component, inject} from '@angular/core';
 import {Router} from '@angular/router';
 import {IonContent, IonHeader, IonToolbar, IonItem, IonList, IonTitle, IonBackButton, IonButtons} from '@ionic/angular/standalone';
-import {AuthService} from 'src/services/auth.service';
+import {AuthService} from '../../../services/auth.service';
+import {ProfilePicUploaderComponent} from '../../components/profile-picture-uploader/profile-picture-uploader.component';
 
 @Component({
   imports: [
@@ -12,10 +13,12 @@ import {AuthService} from 'src/services/auth.service';
     IonItem,
     IonList,
     IonTitle,
-    IonBackButton
+    IonBackButton,
+    ProfilePicUploaderComponent
   ],
   standalone: true,
-  templateUrl: './settings.page.pug'
+  styleUrls: ['./settings.page.scss'],
+  templateUrl: './settings.page.pug',
 })
 export class SettingsPage {
   public readonly authSvc = inject(AuthService);

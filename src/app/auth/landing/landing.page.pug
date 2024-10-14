@@ -1,0 +1,13 @@
+ion-content.ion-text-center.ion-padding
+  .h-80.flex.mt-10
+    .mb-20
+      .pt-5.icon
+      .mtb-3.small Welcome to TunedIn
+
+    .text-center
+      ion-button.continue.w-80.mb-3(shape='round', (click)='signInWithSpotify()', [disabled]="busy")
+          .btn-text.medium Continue with Spotify
+
+      .small.m-a.w-75
+          | Don't have a Spotify account? Don't worry&nbsp;
+          a((click)='navSignIn()') Sign up here.

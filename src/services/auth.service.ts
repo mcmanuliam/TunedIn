@@ -16,6 +16,20 @@ export class AuthService {
 
   readonly #storage = inject(Storage);
 
+  public async signInWithSpotify(): Promise<void> {
+    const {error} = await this.#supaSvc.client.auth.signInWithOAuth({
+      options: {
+        scopes: 'user-read-email user-read-private',
+      },
+      provider: 'spotify',
+    });
+
+    if (error) {
+      LogService.error('Spotify sign-in failed:', 'auth.service.signInWithSpotify', error);
+      throw error;
+    }
+  }
+
   public async signUp(email: string, password: string): Promise<{
     user: User | null;
     session: Session | null;

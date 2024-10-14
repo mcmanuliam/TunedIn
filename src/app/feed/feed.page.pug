@@ -1,7 +1,16 @@
 ion-header([translucent]="true")
-    ion-toolbar
-        .text-heading.xlarge.m-3 Discover
+    ion-toolbar.centre-toolbar
+        ion-title.text-heading.large Discover
 
-ion-content([fullscreen]='true').ion-padding
-    ion-thumbnail.w-100.h-20.mb-3
-        ion-skeleton-text([animated]='true')
+ion-content([fullscreen]='true', (click)="scrollToTop($event)").ion-padding
+    ion-header(collapse="condense").collapse
+        ion-toolbar.mb-2
+            .text-heading.xlarge.mb-4 Discover
+
+    .mb-3(*ngIf='feedConf.layout.recentReleases')
+        .minor-heading.medium.ml-2.mb-1 Trending
+        recent-releases
+
+    .mb-3(*ngIf='feedConf.layout.topPlaylists')
+        .minor-heading.medium.ml-2.mb-1 Top Playlists
+        featured-playlists

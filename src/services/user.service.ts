@@ -49,7 +49,8 @@ export class UserService {
 
       if (error) {
         LogService.error('Error fetching user profile:', 'user.service.get', error);
-        return await this.#storage.get(StoreNames.USER);
+        this.user = await this.#storage.get(StoreNames.USER);
+        return this.user;
       }
 
       this.user = data as IUserProfile;

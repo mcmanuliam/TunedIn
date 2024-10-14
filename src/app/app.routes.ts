@@ -1,4 +1,5 @@
 import type {Routes} from '@angular/router';
+import {spotifyConfig} from '../config/spotify';
 import {AllowIfProfileSetup} from '../guards/profile-setup.guard';
 import {AllowIfUser} from '../guards/user.guard';
 import {FeedPage} from './feed/feed.page';
@@ -32,11 +33,11 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/auth/sign-in',
+    redirectTo: spotifyConfig.oauth ? '/auth/landing' : '/auth/sign-in',
   },
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: '/auth/sign-in',
+    redirectTo: spotifyConfig.oauth ? '/auth/landing' : '/auth/sign-in',
   },
 ];

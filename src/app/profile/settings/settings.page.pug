@@ -1,10 +1,16 @@
-ion-header
-    ion-toolbar.header
-      ion-back-button(slot='start')
-      ion-title Settings
+ion-header([translucent]="true")
+    ion-toolbar.w-90.centre-toolbar
+      ion-back-button(slot='start', text='').text-heading.small
+      ion-title.text-heading.large Settings
 
 ion-content([fullscreen]='true').ion-padding
   ion-list
+    .w-100.text-center
+      .m-a.w-30
+        profile-picture([editable]='true')
+        .ptb-2
+          a.xsmall.weight-600 Edit picture
+
     ion-item
       .small Account
 
