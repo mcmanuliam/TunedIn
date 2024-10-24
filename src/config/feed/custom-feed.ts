@@ -1,4 +1,5 @@
 import type {Type} from "@angular/core";
+import {ChartsComponent} from "../../app/components/charts/charts.component";
 import {NearbyConcertsComponent} from "../../app/components/concerts/nearby-concerts/nearby-concerts.component";
 import {TrendingConcertsComponent} from "../../app/components/concerts/trending-concerts/trending-concerts.component";
 import {FeaturedPlaylistsComponent} from "../../app/components/featured-playlists/featured-playlists.component";
@@ -35,5 +36,10 @@ export const feedLayoutConfig: IFeedItem[] = [
     component: NearbyConcertsComponent,
     enable: true,
     title: 'Nearby Concerts',
+  },
+  {
+    component: ChartsComponent,
+    enable: true,
+    title: 'Todays top 50',
   },
 ]

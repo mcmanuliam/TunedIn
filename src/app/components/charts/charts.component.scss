@@ -1,0 +1,15 @@
+ion-item {
+    --padding-bottom: var(--space-2);
+    --padding-top: var(--space-2);
+}
+
+ion-label {
+    width: var(--width-75);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.play {
+    color: var(--ion-text-color-step-300);
+}

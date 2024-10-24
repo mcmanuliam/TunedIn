@@ -3,6 +3,7 @@ import {Component, ViewChild} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {IonContent, IonHeader, IonToolbar, IonButton, IonIcon, IonTitle} from '@ionic/angular/standalone';
 import {feedConfig} from '../../config/feed/feed';
+import {ChartsComponent} from '../components/charts/charts.component';
 import {NearbyConcertsComponent} from '../components/concerts/nearby-concerts/nearby-concerts.component';
 import {TrendingConcertsComponent} from '../components/concerts/trending-concerts/trending-concerts.component';
 import {FeaturedPlaylistsComponent} from '../components/featured-playlists/featured-playlists.component';
@@ -20,6 +21,7 @@ import {RecentReleasesComponent} from '../components/recent-releases/recent-rele
     IonIcon,
     IonTitle,
     NotesComponent,
+    ChartsComponent,
     RecentReleasesComponent,
     FeaturedPlaylistsComponent,
     TrendingConcertsComponent,

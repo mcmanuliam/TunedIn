@@ -1,0 +1,68 @@
+.play {
+    color: var(--ion-text-color-step-300);
+}
+
+ion-item {
+    position: sticky;
+    margin: var(--space-2);
+    z-index: 10;
+    --padding-bottom: var(--space-2);
+    --padding-top: var(--space-1);
+    --padding-start: var(--space-2);
+    --padding-end: var(--space-2);
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--ion-background-color-step-100);
+    border-radius: var(--space-3);
+    box-shadow: var(--ion-player-shadow) 0px 8px 24px;
+}
+
+ion-item::part(native) {
+    background-color: var(--ion-player-background);
+}
+
+ion-progress-bar {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    --progress-background: var(--ion-text-color-step-300);
+    margin: 0;
+}
+
+ion-label {
+    width: var(--width-75);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+.cover {
+    aspect-ratio: 1;
+    border-color: var(--ion-background-color-step-100);
+    background-color: var(--ion-background-color-step-200);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: var(--space-2);
+}
+
+.gradient {
+    position: fixed;
+    bottom: calc(var(--space-4) + var(--space-5));
+    left: 0;
+    width: 100%;
+    z-index: 5;
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        width: var(--width-100);
+        height: var(--space-10);
+        background: linear-gradient(to top, var(--ion-background-color), transparent);
+        pointer-events: none;
+    }
+}

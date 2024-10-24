@@ -27,11 +27,16 @@
 
 /* CSS rules */
 
-/* Fix issue with ion footer not disapearing on route change*/
+/* Fix issue with ion footer not disapearing on route change */
 ion-footer {
     left: 0;
     bottom: 0;
     position: absolute;
+}
+
+/* Fix issue with image draging on ios */
+img {
+    -webkit-user-drag: none;
 }
 
 ion-toolbar {

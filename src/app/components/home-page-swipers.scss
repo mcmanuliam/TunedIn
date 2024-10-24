@@ -14,6 +14,7 @@ swiper-slide {
 
 .image {
   width: var(--width-100);
+  border-radius: var(--space-2);
   aspect-ratio: 1;
 }
 
@@ -30,6 +31,7 @@ a {
   background-color: var(--ion-background-color-step-200);
   border-style: solid;
   border-width: 1px;
+  border-radius: var(--space-2);
 }
 
 .cover {
@@ -39,6 +41,7 @@ a {
   background-color: var(--ion-background-color-step-200);
   border-style: solid;
   border-width: 1px;
+  border-radius: var(--space-2);
 }
 
 .icon-cover {
@@ -46,6 +49,7 @@ a {
   background-color: var(--ion-background-color-step-100);
   display: flex;
   justify-content: center;
+  border-radius: var(--space-2);
   align-items: center;
 }
 
@@ -55,14 +59,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.icon-cover {
-  aspect-ratio: 1;
-  background-color: var(--ion-background-color-step-100);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border-radius: var(--space-2);
 }
 
 .icon {

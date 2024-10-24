@@ -5,11 +5,11 @@ import {BehaviorSubject} from 'rxjs';
   providedIn: 'root',
 })
 export class ProfilePictureService {
-  readonly #profilePictureUrlSubject = new BehaviorSubject<string | null>(null);
+  readonly #profilePictureUrl = new BehaviorSubject<string | null>(null);
 
-  public profilePictureUrl$ = this.#profilePictureUrlSubject.asObservable();
+  public profilePictureUrl$ = this.#profilePictureUrl.asObservable();
 
   public updateProfilePicture(url: string) {
-    this.#profilePictureUrlSubject.next(url);
+    this.#profilePictureUrl.next(url);
   }
 }

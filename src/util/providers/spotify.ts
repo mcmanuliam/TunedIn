@@ -19,7 +19,7 @@ const TOKEN_URL = 'https://accounts.spotify.com/api/token';
 export class SpotifyImpl {
   readonly #http = inject(HttpClient);
 
-  readonly #spotifyConfig = spotifyConfig;
+  readonly #spotifyCfg = spotifyConfig;
 
   #accessToken: string | null = null;
 
@@ -29,12 +29,15 @@ export class SpotifyImpl {
     return this.#getValidToken()
       .pipe(
         switchMap((token: string) => {
-          const httpParams = new HttpParams({fromObject: params});
+          const httpParams = new HttpParams({fromObject: {
+            ...params,
+            market: this.#spotifyCfg.region
+          }});
           const headers = new HttpHeaders({
             Authorization: `Bearer ${token}`,
           });
 
-          return this.#http.get<T>(`${this.#spotifyConfig.baseUrl}${endpoint}`, {
+          return this.#http.get<T>(`${this.#spotifyCfg.baseUrl}${endpoint}`, {
             headers,
             params: httpParams,
           });
@@ -58,7 +61,7 @@ export class SpotifyImpl {
   }
 
   #getSpotifyToken(): Observable<ITokenRes> {
-    const authHeader = btoa(`${this.#spotifyConfig.clientId}:${this.#spotifyConfig.clientSecret}`);
+    const authHeader = btoa(`${this.#spotifyCfg.clientId}:${this.#spotifyCfg.clientSecret}`);
     const headers = new HttpHeaders({
       Authorization: `Basic ${authHeader}`,
       'Content-Type': 'application/x-www-form-urlencoded',

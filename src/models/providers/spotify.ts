@@ -25,6 +25,12 @@ export interface IFeaturedPlaylistsResponse {
   };
 }
 
+export interface IPlaylistTracksResponse {
+  items: {
+    track: ITrack
+  }[];
+}
+
 export interface IPlaylist {
   id: string;
 
@@ -85,6 +91,40 @@ export interface IAlbum {
   uri: string;
 
   artists: IArtist[];
+}
+
+export interface ITrack {
+  id: string;
+
+  name: string;
+
+  duration_ms: number;
+
+  preview_url: string;
+
+  album: {
+    id: string;
+
+    name: string;
+
+    images: {
+      url: string;
+
+      height: number;
+
+      width: number;
+    }[];
+  };
+
+  artists: {
+    id: string;
+
+    name: string;
+  }[];
+
+  external_urls: {
+    spotify: string;
+  };
 }
 
 export interface IArtist {

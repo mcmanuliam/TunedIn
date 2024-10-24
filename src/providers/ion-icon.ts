@@ -15,6 +15,10 @@ import {
   chevronForwardOutline,
   addOutline,
   hammer,
+  chevronUpOutline,
+  chevronDownOutline,
+  play,
+  pause,
 } from 'ionicons/icons';
 
 /**
@@ -29,7 +33,9 @@ export function provideIonIcons(): Provider[] {
       useFactory: () => () => {
         addIcons({
           'add-outline': addOutline,
+          'chevron-down-outline': chevronDownOutline,
           'chevron-forward-outline': chevronForwardOutline,
+          'chevron-up-outline': chevronUpOutline,
           'close-outline': closeOutline,
           'eye-off-outline': eyeOffOutline,
           'eye-outline:': eyeOutline,
@@ -39,8 +45,10 @@ export function provideIonIcons(): Provider[] {
           home,
           menu,
           'navigate-circle': navigateCircle,
+          pause,
           person,
-          warning,
+          play,
+          warning
         });
       },
     },

@@ -1,0 +1,13 @@
+ng-container(*ngIf="currentTrack")
+  ion-item(lines="none")
+    ion-progress-bar([value]="musicPlayerSvc.duration", slot="start")
+    ion-thumbnail(slot="start")
+      img.cover([src]="currentTrack.album.images[0].url")
+
+    ion-label
+      .sub-heading.xxsmall {{currentTrack.name}}
+      .description.xxxsmall {{getArtists(currentTrack)}}, {{formatDuration(currentTrack.duration_ms)}}
+
+    ion-button(fill="clear", size="small", slot="end", (click)="togglePlayPause()")
+      ion-icon.play([name]="isPlaying ? 'pause' : 'play'")
+  .gradient
