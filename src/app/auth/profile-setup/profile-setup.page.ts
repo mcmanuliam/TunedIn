@@ -95,7 +95,7 @@ export class ProfileSetupPage extends AbstractFormComponent<IValue> {
 
     try {
       await Promise.all([
-        await this.#reactionSvc.insert(reactionUrls, this.#userSvc.user?.id),
+        await this.#reactionSvc.upsert(reactionUrls, this.#userSvc.user?.id),
         await this.#userSvc.finialiseProfileSetup(this.value.displayName)
       ])
 

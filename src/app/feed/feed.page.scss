@@ -1,0 +1,25 @@
+.story {
+    border-radius: var(--width-50);
+    display: inline-block;
+    aspect-ratio: 1;
+    flex-shrink: 0;
+}
+
+.flex-along {
+    display: flex;
+    align-items: center;
+  }
+
+.collapse ion-toolbar {
+    border-bottom: 1px solid var(--ion-background-color-step-50);
+}
+
+ion-header {
+    position: relative;
+    top: -20px;
+}
+
+.minor-heading {
+    margin-top: auto;
+    margin-bottom: auto;
+}

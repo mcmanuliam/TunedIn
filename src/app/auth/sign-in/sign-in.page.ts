@@ -3,6 +3,7 @@ import {Component, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {IonInput, IonLabel, IonItem, IonButton, IonInputPasswordToggle} from '@ionic/angular/standalone';
+import {spotifyConfig} from '../../../config/providers/spotify';
 import {AuthService} from '../../../services/auth.service';
 import {LogService} from '../../../services/log.service';
 import {ToastService} from '../../../services/toast.service';
@@ -44,6 +45,8 @@ export class SigninPage implements AbstractFormComponent<IValue> {
 
   public busy = false;
 
+  public spotifyConf = spotifyConfig;
+
   public value = {
     email: '',
 
@@ -55,6 +58,14 @@ export class SigninPage implements AbstractFormComponent<IValue> {
       await this.#router.navigate(['/auth/sign-up'], {replaceUrl: true})
     } catch (error) {
       LogService.warn('Failed to navigate:', 'sign-in.component.navToSignIn', error);
+    }
+  }
+
+  public async navToLanding(): Promise<void> {
+    try {
+      await this.#router.navigate(['/auth/landing'], {replaceUrl: true})
+    } catch (error) {
+      LogService.warn('Failed to navigate:', 'sign-in.component.navToLanding', error);
     }
   }
 

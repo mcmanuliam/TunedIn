@@ -5,7 +5,7 @@ import {BucketNames} from "../util/enums/bucket-names.enum";
 import {TableNames} from "../util/enums/table-names.enum";
 import {convertB64ToBlob} from "../util/functions/convert-base64-blob";
 import {LogService} from "./log.service";
-import {SupabaseService} from "./supabase.service";
+import {SupabaseService} from "./providers/supabase.service";
 import {UserService} from "./user.service";
 
 @Injectable({
@@ -75,10 +75,20 @@ export class ReactionService {
     return this.reactions;
   }
 
+  public async upsert(opts: GenericObject<any>, userId?: string): Promise<IReactions | null> {
+    const curUser = userId ?? this.#userSvc.user?.id;
+
+    const data = await this.get();
+    if (data) {
+      return this.update(opts, curUser);
+    } else {
+      return this.insert(opts, curUser);
+    }
+  }
+
+
   public async uploadImage(base64String: string, fileName: string): Promise<null | string> {
-    /* Convert base64 to a Blob file */
     const blob = convertB64ToBlob(base64String);
-    /* Upload to Supabase storage */
     const {error} = await this.#supaSvc.client.storage
       .from(BucketNames.REACTIONS)
       .upload(`${this.#userSvc.user?.id}/${fileName}`, blob);
@@ -88,7 +98,6 @@ export class ReactionService {
       return null;
     }
 
-    /* Fetch the uploaded image */
     const {data} = this.#supaSvc.client.storage
       .from(BucketNames.REACTIONS)
       .getPublicUrl(`${this.#userSvc.user?.id}/${fileName}`);

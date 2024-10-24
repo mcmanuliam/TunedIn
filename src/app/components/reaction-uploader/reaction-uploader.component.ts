@@ -3,6 +3,7 @@ import {CommonModule} from "@angular/common";
 import {Component, forwardRef, Input} from "@angular/core";
 import {FormsModule, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {IonInput, IonButton, IonIcon} from '@ionic/angular/standalone';
+import {HapticDirective} from "../../../util/haptic.directive";
 import {AbstractValueAccessor} from "../abstract.value.accessor";
 
 @Component({
@@ -12,6 +13,7 @@ import {AbstractValueAccessor} from "../abstract.value.accessor";
     IonInput,
     IonButton,
     FormsModule,
+    HapticDirective
   ],
   providers: [
     {

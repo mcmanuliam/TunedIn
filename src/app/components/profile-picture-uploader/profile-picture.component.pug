@@ -1,0 +1,18 @@
+.container((click)='triggerFileInput()', *ngIf='!busy; else loading')
+  .pic-container
+    .profile-pic([ngClass]="{'empty': !profilePictureUrl}", [ngStyle]="{'background-image': profilePictureUrl ? 'url(' + profilePictureUrl + ')' : ''}")
+  ion-button.add(*ngIf='editable && !profilePictureUrl', size="small")
+    ion-icon(slot="icon-only", name='add-outline')
+
+ng-template(#loading)
+  .container
+    ion-skeleton-text.pic-container
+
+input(
+  #fileInput,
+  *ngIf='editable',
+  type='file',
+  accept='image/*',
+  (change)='onFileSelected($event)',
+  style='display: none'
+)

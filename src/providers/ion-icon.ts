@@ -13,6 +13,8 @@ import {
   person,
   menu,
   chevronForwardOutline,
+  addOutline,
+  hammer,
 } from 'ionicons/icons';
 
 /**
@@ -26,17 +28,19 @@ export function provideIonIcons(): Provider[] {
       provide: APP_INITIALIZER,
       useFactory: () => () => {
         addIcons({
+          'add-outline': addOutline,
           'chevron-forward-outline': chevronForwardOutline,
           'close-outline': closeOutline,
           'eye-off-outline': eyeOffOutline,
           'eye-outline:': eyeOutline,
+          hammer,
           'heart-outline': heartOutline,
           'help-circle': helpCircle,
           home,
           menu,
           'navigate-circle': navigateCircle,
           person,
-          warning
+          warning,
         });
       },
     },

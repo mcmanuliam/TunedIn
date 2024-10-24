@@ -6,7 +6,7 @@ import type {IUserProfile} from "../models/user";
 import {StoreNames} from "../util/enums/store-names.enum";
 import {TableNames} from "../util/enums/table-names.enum";
 import {LogService} from "./log.service";
-import {SupabaseService} from "./supabase.service";
+import {SupabaseService} from "./providers/supabase.service";
 
 @Injectable({
   providedIn: 'root',
@@ -49,7 +49,8 @@ export class UserService {
 
       if (error) {
         LogService.error('Error fetching user profile:', 'user.service.get', error);
-        return await this.#storage.get(StoreNames.USER);
+        this.user = await this.#storage.get(StoreNames.USER);
+        return this.user;
       }
 
       this.user = data as IUserProfile;
