@@ -4,6 +4,7 @@ import {Component, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {IonInput, IonLabel, IonItem, IonButton, IonInputPasswordToggle} from '@ionic/angular/standalone';
+import {spotifyConfig} from '../../../config/providers/spotify';
 import {AuthService} from '../../../services/auth.service';
 import {LogService} from '../../../services/log.service';
 import {ToastService} from '../../../services/toast.service';
@@ -34,17 +35,13 @@ interface IValue {
   templateUrl: './sign-up.page.pug',
 })
 export class SignupPage implements AbstractFormComponent<IValue> {
-  readonly #authSvc = inject(AuthService);
-
-  readonly #router = inject(Router);
-
-  readonly #toast = inject(ToastService);
-
   public readonly heading = 'Get Started.';
 
   public readonly description = 'Sign up to start capturing the world.';
 
   public busy = false;
+
+  public spotifyConf = spotifyConfig;
 
   public value = {
     confPassword: '',
@@ -54,13 +51,28 @@ export class SignupPage implements AbstractFormComponent<IValue> {
     password: '',
   }
 
+  readonly #authSvc = inject(AuthService);
+
+  readonly #router = inject(Router);
+
+  readonly #toast = inject(ToastService);
+
   public async navToSignIn(): Promise<void> {
     try {
       await this.#router.navigate(['/auth/sign-in'], {replaceUrl: true})
     } catch (error) {
-      LogService.warn('Failed to navigate:', 'sign-in.component.navToSignIn', error);
+      LogService.warn('Failed to navigate', 'sign-up.component.navToSignIn', error);
     }
   }
+
+  public async navToLanding(): Promise<void> {
+    try {
+      await this.#router.navigate(['/auth/landing'], {replaceUrl: true})
+    } catch (error) {
+      LogService.warn('Failed to navigate', 'sign-up.component.navToLanding', error);
+    }
+  }
+
 
   public async onSubmit(): Promise<void> {
     this.busy = true;
@@ -83,7 +95,7 @@ export class SignupPage implements AbstractFormComponent<IValue> {
         await errorToast.present();
         return;
       }
-      LogService.error('Error signing in:', 'sign-in.component.onSubmit', error);
+      LogService.error('Error signing up', 'sign-up.component.onSubmit', error);
       const errorToast = await this.#toast.showWarning(ErrorMessages.DEFAULT_SIGN_UP);
       await errorToast.present();
     }

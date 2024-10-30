@@ -9,9 +9,9 @@ import type {ControlValueAccessor} from "@angular/forms";
  * @template T The type of the form control's value.
  */
 export abstract class AbstractValueAccessor<T> implements ControlValueAccessor {
-  protected _value!: T;
-
   public busy = false;
+
+  protected _value!: T;
 
   public get value(): T {
     return this._value;
@@ -22,9 +22,6 @@ export abstract class AbstractValueAccessor<T> implements ControlValueAccessor {
     this.onChange(val);
     this.onTouched();
   }
-
-  protected onChange: (value: T) => void = () => {};
-  protected onTouched: () => void = () => {};
 
   public writeValue(value: T): void {
     if (value !== undefined && value !== null) {
@@ -39,4 +36,8 @@ export abstract class AbstractValueAccessor<T> implements ControlValueAccessor {
   public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
+
+  protected onChange: (value: T) => void = () => {};
+
+  protected onTouched: () => void = () => {};
 }

@@ -1,0 +1,6 @@
+ion-item
+  ion-thumbnail(slot="start")
+    img.cover([src]="playlist.images[0].url", loading="lazy")
+  ion-label
+    .overflow-ellipsis-1.sub-heading.xxsmall {{playlist.name}}
+    .overflow-ellipsis-1.description.xxxsmall {{playlist.description}}

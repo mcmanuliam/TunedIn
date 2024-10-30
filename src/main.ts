@@ -7,13 +7,16 @@ import {provideIonIcons} from './providers/ion-icon';
 import {provideHttpClient} from '@angular/common/http';
 import {AppComponent} from './app/app.component';
 import {routes} from './app/app.routes';
+import {provideAppEventListeners} from './providers/app-initialisation';
 
 registerSwiperElements(),
-bootstrapApplication(AppComponent, {
+bootstrapApplication(
+  AppComponent, {
   providers: [
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     provideIonicAngular(),
     provideUserInitialization(),
+    provideAppEventListeners(),
     provideIonIcons(),
     provideHttpClient(),
     provideRouter(routes, withPreloading(PreloadAllModules)),

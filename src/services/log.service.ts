@@ -11,6 +11,18 @@ import {Injectable} from "@angular/core";
   providedIn: 'root',
 })
 export class LogService {
+  public static warn(message: string, namespace: string, value?: unknown): void {
+    this.logMessage('warn', message, namespace, value);
+  }
+
+  public static error(message: string, namespace: string, value?: unknown): void {
+    this.logMessage('error', message, namespace, value);
+  }
+
+  public static log(message: string, namespace: string, value?: unknown): void {
+    this.logMessage('log', message, namespace, value);
+  }
+
   private static logMessage(
     level: 'warn' | 'error' | 'log',
     message: string,
@@ -24,17 +36,5 @@ export class LogService {
     } else {
       console[level](formattedMessage);
     }
-  }
-
-  public static warn(message: string, namespace: string, value?: unknown): void {
-    this.logMessage('warn', message, namespace, value);
-  }
-
-  public static error(message: string, namespace: string, value?: unknown): void {
-    this.logMessage('error', message, namespace, value);
-  }
-
-  public static log(message: string, namespace: string, value?: unknown): void {
-    this.logMessage('log', message, namespace, value);
   }
 }

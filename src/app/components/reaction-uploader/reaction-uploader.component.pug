@@ -4,10 +4,11 @@
         type='button',
         (click)='triggerFileInput()',
         [disabled]='busy',
+        haptic
     )
         .emoji {{reaction.value}}
 
-    .uploaded(*ngIf='value')
+    .uploaded(*ngIf='value; else empty')
         .emoji-uploaded {{reaction.value}}
         ion-button.clear((click)='this.value = ""', size="small", [disabled]='busy')
             ion-icon(slot="icon-only", name='close-outline')
@@ -17,10 +18,15 @@
         )
             img.image([src]='value')
 
+    ng-template(#empty)
+        ion-button.add(size="small")
+            ion-icon(slot="icon-only", name='add-outline')
+
 input(
     type='file',
     accept='image/*',
     (change)='onFileSelected($event)',
     aria-label='profile_image',
     [id]='inputId',
+    name='photUpload'
 )

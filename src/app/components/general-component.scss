@@ -1,0 +1,59 @@
+swiper-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-1);
+}
+
+.image {
+  width: var(--width-100);
+  border-radius: var(--space-2);
+  aspect-ratio: 1;
+}
+
+a {
+  color: var(--ion-text-color);
+}
+
+.concert {
+  width: var(--width-100);
+  aspect-ratio: 1.5/1;
+  object-fit: cover;
+  border-color: var(--ion-background-color-step-100);
+  background-color: var(--ion-background-color-step-200);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: var(--space-2);
+}
+
+.cover {
+  width: var(--width-100);
+  aspect-ratio: 1;
+  border-color: var(--ion-background-color-step-100);
+  background-color: var(--ion-background-color-step-200);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: var(--space-2);
+}
+
+.icon-cover {
+  aspect-ratio: 1;
+  background-color: var(--ion-background-color-step-100);
+  display: flex;
+  justify-content: center;
+  border-radius: var(--space-2);
+  align-items: center;
+}
+
+.icon-concert {
+  aspect-ratio: 1.5/1;
+  background-color: var(--ion-background-color-step-100);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--space-2);
+}
+
+.icon {
+  --ionicon-stroke-width: 64px;
+}

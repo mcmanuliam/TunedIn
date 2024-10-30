@@ -1,0 +1,12 @@
+.swipe-container(*ngIf="currentTrack")
+  ion-item(lines="none")
+    ion-progress-bar([value]="duration", slot="start")
+    ion-thumbnail(slot="start")
+      img.cover([src]="currentTrack.album.images[0].url")
+
+    ion-label
+      .sub-heading.xxsmall.overflow-ellipsis-1 {{currentTrack.name}}
+      .description.xxxsmall.overflow-ellipsis-1 {{getArtists(currentTrack)}}, {{currentTrack.duration_ms|formatDuration}}
+
+    ion-button(fill="clear", size="small", slot="end", (click)="togglePlayPause()")
+      ion-icon.play([name]="isPlaying ? 'pause' : 'play'")

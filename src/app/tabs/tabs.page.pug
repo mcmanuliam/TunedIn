@@ -1,10 +1,18 @@
 ion-tabs
+    music-player(*ngIf='!isKeyboardVisible')
+
     ion-tab-bar(slot='bottom')
         ion-tab-button(tab='home')
             ion-icon(name='home')
+
+        ion-tab-button(tab='search')
+            ion-icon(name='search')
+
+        ion-tab-button(tab='other')
+            ion-icon(name='add-outline')
+
         ion-tab-button(tab='other')
             ion-icon(name='home')
-        ion-tab-button(tab='other')
-            ion-icon(name='home')
+
         ion-tab-button(tab='profile')
-            ion-icon(name='person')
+            profile-picture.w-40

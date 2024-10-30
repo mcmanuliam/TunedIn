@@ -3,7 +3,7 @@ import {Storage} from '@ionic/storage-angular';
 import type {Session, User, WeakPassword} from '@supabase/supabase-js';
 import {StoreNames} from '../util/enums/store-names.enum';
 import {LogService} from './log.service';
-import {SupabaseService} from './supabase.service';
+import {SupabaseService} from './providers/supabase.service';
 import {UserService} from './user.service';
 
 @Injectable({
@@ -84,15 +84,15 @@ export class AuthService {
             LogService.warn('Refresh token is invalid, redirecting to sign-in', 'auth.service.restoreSession')
             await this.#clearTokens();
           } else {
-            LogService.error('Session restoration failed:', 'auth.service.restoreSession', error);
+            LogService.error('Session restoration failed', 'auth.service.restoreSession', error);
             throw error;
           }
         } else {
-          LogService.log('Session restored:', 'auth.service.restoreSession', data.session);
+          LogService.log('Session restored', 'auth.service.restoreSession', data.session);
           await this.#setTokens(accessToken, refreshToken)
         }
       } catch (error) {
-        LogService.error('Unexpected error:', 'auth.service.restoreSession', error);
+        LogService.error('Unexpected error', 'auth.service.restoreSession', error);
       }
     }
   }

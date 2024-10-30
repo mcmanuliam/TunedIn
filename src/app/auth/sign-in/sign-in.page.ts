@@ -3,6 +3,7 @@ import {Component, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {IonInput, IonLabel, IonItem, IonButton, IonInputPasswordToggle} from '@ionic/angular/standalone';
+import {spotifyConfig} from '../../../config/providers/spotify';
 import {AuthService} from '../../../services/auth.service';
 import {LogService} from '../../../services/log.service';
 import {ToastService} from '../../../services/toast.service';
@@ -32,17 +33,13 @@ interface IValue {
   templateUrl: './sign-in.page.pug',
 })
 export class SigninPage implements AbstractFormComponent<IValue> {
-  readonly #authSvc = inject(AuthService);
-
-  readonly #router = inject(Router);
-
-  readonly #toast = inject(ToastService);
-
   public readonly heading = 'Welcome Back.';
 
   public readonly description = 'Sign in to continue capturing the world.';
 
   public busy = false;
+
+  public spotifyConf = spotifyConfig;
 
   public value = {
     email: '',
@@ -50,11 +47,25 @@ export class SigninPage implements AbstractFormComponent<IValue> {
     password: '',
   }
 
+  readonly #authSvc = inject(AuthService);
+
+  readonly #router = inject(Router);
+
+  readonly #toast = inject(ToastService);
+
   public async navToSignUp(): Promise<void> {
     try {
       await this.#router.navigate(['/auth/sign-up'], {replaceUrl: true})
     } catch (error) {
-      LogService.warn('Failed to navigate:', 'sign-in.component.navToSignIn', error);
+      LogService.warn('Failed to navigate', 'sign-in.component.navToSignIn', error);
+    }
+  }
+
+  public async navToLanding(): Promise<void> {
+    try {
+      await this.#router.navigate(['/auth/landing'], {replaceUrl: true})
+    } catch (error) {
+      LogService.warn('Failed to navigate', 'sign-in.component.navToLanding', error);
     }
   }
 
@@ -70,7 +81,7 @@ export class SigninPage implements AbstractFormComponent<IValue> {
       this.busy = false;
       const toast = await this.#toast.showWarning(ErrorMessages.DEFAULT_SIGN_IN)
       await toast.present();
-      LogService.warn('Error signing in:', 'sign-in.component.onSubmit', error);
+      LogService.warn('Error signing in', 'sign-in.component.onSubmit', error);
     }
   }
 }

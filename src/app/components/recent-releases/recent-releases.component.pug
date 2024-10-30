@@ -1,0 +1,19 @@
+swiper-container(slides-per-view="3")
+    ng-container(*ngIf="isLoading && newReleases.length === 0")
+      swiper-slide(*ngFor="let skeleton of [1, 2, 3]")
+        ion-skeleton-text.image
+        ion-skeleton-text.skeleton-text.text-heading.xxsmall.mt-2
+
+    ng-container(*ngIf="!isLoading || newReleases.length > 0")
+        ng-container(*ngFor="let release of newReleases")
+            swiper-slide
+                a([href]="release.external_urls.spotify", target="_blank")
+                    img.cover([src]="release.images[0].url", loading="lazy")
+                    .w-100
+                        .sub-heading.xxsmall.mt-1.overflow-ellipsis-1 {{release.name}}
+                        .xxxsmall.overflow-ellipsis-1 {{getArtists(release.artists)}}
+
+        swiper-slide(*ngIf="!isLoading")
+            a.icon-cover.cover
+                ion-icon.icon.large(name='add-outline')
+            .sub-heading.xxsmall.mt-1.w-100.overflow-ellipsis-1 See More

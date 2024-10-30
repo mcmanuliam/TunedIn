@@ -1,0 +1,47 @@
+ion-header
+  ion-toolbar
+    ion-searchbar.pb-1(
+      (ionInput)="onSearchChange($event)",
+      [debounce]="500",
+      placeholder="Search Spotify...",
+      autocomplete="on"
+    )
+
+    .ml-2.mr-2.mb-2.chips.inline-block
+      ion-chip.xxsmall(
+        *ngFor="let filter of searchConfig.searchFilters",
+        (click)="setFilter(filter.type)",
+        [outline]="selectedFilter !== filter.type"
+      ) {{filter.label}}
+
+ion-content(fullscreen="true").ion-padding
+  .mt-1(*ngIf="isLoading && !results?.tracks?.items?.length")
+    ion-list
+      ion-item(*ngFor="let skeleton of [1, 2, 3, 4, 5]")
+        ion-thumbnail(slot="start")
+          ion-skeleton-text.cover
+        ion-label
+          ion-skeleton-text.text.sub-heading.xxsmall
+          ion-skeleton-text.text.description.xxxsmall
+
+  ion-list.mt-1(*ngIf="results?.tracks?.items && selectedFilter === searchFilters.TRACK")
+    song-item(*ngFor="let track of results.tracks?.items", [track]="track")
+
+    ion-infinite-scroll(
+      threshold="100px",
+      (ionInfinite)="loadMore($event)",
+      [disabled]="isLoading || !hasMoreResults"
+    )
+
+      ion-infinite-scroll-content(loadingSpinner="bubbles", loadingText="Loading more results...")
+
+  ion-list.mt-1(*ngIf="results?.playlists?.items && selectedFilter === searchFilters.PLAYLIST")
+    playlist-item(*ngFor="let playlist of results.playlists?.items", [playlist]="playlist")
+
+    ion-infinite-scroll(
+      threshold="100px",
+      (ionInfinite)="loadMore($event)",
+      [disabled]="isLoading || !hasMoreResults"
+    )
+
+      ion-infinite-scroll-content(loadingSpinner="bubbles", loadingText="Loading more results...")

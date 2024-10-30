@@ -1,0 +1,29 @@
+.cover {
+    width: var(--width-100);
+    aspect-ratio: 1;
+    border-color: var(--ion-background-color-step-100);
+    background-color: var(--ion-background-color-step-200);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: var(--space-2);
+}
+
+ion-item {
+    --padding-bottom: var(--space-1);
+    --padding-top: var(--space-1);
+    --padding-start: var(--space-1);
+    --padding-end: var(--space-1);
+}
+
+ion-label {
+    width: var(--width-75);
+}
+
+ion-thumbnail {
+    width: var(--space-5);
+    height: var(--space-5);
+}
+
+.play {
+    color: var(--ion-text-color-step-300);
+}

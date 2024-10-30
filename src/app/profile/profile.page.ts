@@ -1,9 +1,10 @@
 import {Component, inject} from '@angular/core';
 import {Router} from '@angular/router';
 import {IonContent, IonButton, IonHeader, IonToolbar, IonIcon, IonItem, IonList} from '@ionic/angular/standalone';
-import type {IUserProfile} from 'src/models/user';
-import {AuthService} from 'src/services/auth.service';
+import type {IUserProfile} from '../../models/user';
+import {AuthService} from '../../services/auth.service';
 import {UserService} from '../../services/user.service';
+import {ProfilePictureComponent} from '../components/profile-picture-uploader/profile-picture.component';
 
 @Component({
   imports: [
@@ -14,6 +15,7 @@ import {UserService} from '../../services/user.service';
     IonIcon,
     IonItem,
     IonList,
+    ProfilePictureComponent
   ],
   standalone: true,
   styleUrls: ['./profile.page.scss'],

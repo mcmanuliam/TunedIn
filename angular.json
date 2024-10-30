@@ -18,6 +18,10 @@
         "build": {
           "builder": "ngx-pug-builders:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "localforage",
+              "ws"
+            ],
             "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -36,8 +40,6 @@
           },
           "configurations": {
             "production": {
-              "buildOptimizer": "TODO: Remove once a fix is released for https://github.com/ionic-team/ionic-framework/issues/2838",
-              "buildOptimizer": false,
               "budgets": [
                 {
                   "type": "initial",

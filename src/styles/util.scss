@@ -44,8 +44,8 @@ $percentage-breakpoints: (
 $base: 1rem;
 
 $font-sizes: (
-  xxxsmall: $base * 0.5,
-  xxsmall: $base * 0.7,
+  xxxsmall: $base * 0.62,
+  xxsmall: $base * 0.70,
   xsmall: $base * 0.8,
   small: $base * 0.875,
   medium: $base,
@@ -57,11 +57,23 @@ $font-sizes: (
 
 /* Define font weights */
 $font-weights: (
-  normal: 400,
-  bold: 700,
-  bolder: 800,
-  boldest: 900,
+  400: 400,
+  500: 500,
+  600: 600,
+  700: 700,
+  800: 800,
+  900: 900,
 );
+
+/* Define line sets */
+$line-set: (
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+);
+
 
 /* Generate font-size classes */
 @each $key, $size in $font-sizes {
@@ -72,43 +84,55 @@ $font-weights: (
 
 /* Generate font-weight classes */
 @each $weight, $value in $font-weights {
-    .#{$weight} {
+    .weight-#{$weight} {
       font-weight: $value !important;
     }
 }
 
+@each $line, $value in $line-set {
+  .overflow-ellipsis-#{$line} {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $value;
+    line-clamp: $value;
+    -webkit-box-orient: vertical;
+  }
+}
+
+
 /*
  * Generate CSS variables for spacers, fonts and breakpoints.
  * These will be accessed through:
- *   var(--tune-space-...)
- *   var(--tune-width-...)
- *   var(--tune-weight-...)
- *   var(--tune-font-size-...)
+ *   var(--space-...)
+ *   var(--width-...)
+ *   var(--weight-...)
+ *   var(--font-size-...)
  */
 :root {
     @each $k, $space in $spaces {
-      --tune-space-#{$k}: #{$space};
+      --space-#{$k}: #{$space};
     }
     @each $k, $width in $percentage-breakpoints {
-      --tune-width-#{$k}: #{$width};
+      --width-#{$k}: #{$width};
     }
     @each $k, $width in $font-weights {
-      --tune-weight-#{$k}: #{$width};
+      --weight-#{$k}: #{$width};
     }
     @each $k, $width in $font-sizes {
-      --tune-font-size-#{$k}: #{$width};
+      --font-size-#{$k}: #{$width};
     }
   }
 
 /* Map to hold references to CSS variables for spacers */
 $varred-spacers: ();
 @each $k in map.keys($spaces) {
-  $varred-spacers: map.set($varred-spacers, $k, var(--tune-space-#{$k}));
+  $varred-spacers: map.set($varred-spacers, $k, var(--space-#{$k}));
 }
 
 $varred-widths: ();
 @each $k in map.keys($percentage-breakpoints) {
-  $varred-widths: map.set($varred-widths, $k, var(--tune-width-#{$k}));
+  $varred-widths: map.set($varred-widths, $k, var(--width-#{$k}));
 }
 
 /* mappings for generating utility classes */
@@ -163,26 +187,30 @@ $mappings: (
   text-align: center;
 }
 
-.verticaly-align-text {
-  display: inline-block;
-  vertical-align: middle;
-  line-height: normal;
-}
-
-.centre-vertically {
-  display: flex;
-  align-items: center;
-}
-
 .m-a {
   margin: auto;
 }
 
-.flex-space-between {
-  display: flex;
-  justify-content: space-between;
-}
-
 .danger {
   color: var(--ion-color-danger)
+}
+
+.lower {
+  text-transform: lowercase;
+}
+
+.upper {
+  text-transform: uppercase;
+}
+
+.flex {
+  justify-content: flex-end;
+  align-content: center;
+  flex-direction: column;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
 }

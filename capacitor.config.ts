@@ -5,8 +5,11 @@ const config: CapacitorConfig = {
   appName: 'TunedIn',
   plugins: {
     splashScreen: {
-      autoHide: false,
+      launchAutoHide: false,
     }
+  },
+  server: {
+    iosScheme: 'git.mcmanuliam.tune',
   },
   webDir: 'www',
 };

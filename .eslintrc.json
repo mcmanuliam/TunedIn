@@ -27,11 +27,88 @@
         "plugin:rxjs/recommended"
       ],
       "rules": {
+        "jsdoc/require-param": "off",
+        "prefer-rest-params": "off",
+        "jsdoc/require-param-type": "off",
+        "jsdoc/require-returns": "off",
+        "jsdoc/no-undefined-types": "off",
+        "jsdoc/require-jsdoc": "off",
+        "rxjs/no-implicit-any-catch": "off",
+        "@typescript-eslint/no-unsafe-enum-comparison": "off",
         "@typescript-eslint/unbound-method": "off",
         "@typescript-eslint/explicit-member-accessibility": [
           "error",
           {"accessibility": "explicit"}
         ],
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/member-ordering": ["warn", {
+          "default": {
+            "memberTypes": [
+              "signature",
+              "call-signature",
+              "public-static-field",
+              "protected-static-field",
+              "private-static-field",
+
+              "public-decorated-field",
+              "protected-decorated-field",
+              "private-decorated-field",
+
+              "public-instance-field",
+              "protected-instance-field",
+              "private-instance-field",
+
+              "public-abstract-field",
+              "protected-abstract-field",
+
+              "public-field",
+              "protected-field",
+              "private-field",
+
+              "static-field",
+              "instance-field",
+              "abstract-field",
+
+              "decorated-field",
+              "field",
+
+              "static-initialization",
+
+              "public-constructor",
+              "protected-constructor",
+              "private-constructor",
+
+              "constructor",
+
+              "public-static-method",
+              "protected-static-method",
+              "private-static-method",
+
+              "public-decorated-method",
+              "protected-decorated-method",
+              "private-decorated-method",
+
+              "public-instance-method",
+              "protected-instance-method",
+              "private-instance-method",
+
+              "public-abstract-method",
+              "protected-abstract-method",
+
+              "public-method",
+              "protected-method",
+              "private-method",
+
+              "static-method",
+              "instance-method",
+              "abstract-method",
+
+              "decorated-method",
+              "method"
+            ],
+          "order": "as-written"
+        }
+      }],
         "@typescript-eslint/no-unsafe-assignment": "off",
         "@typescript-eslint/no-unsafe-call": "off",
         "@typescript-eslint/no-unsafe-return": "off",

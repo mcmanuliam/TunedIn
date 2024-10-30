@@ -1,0 +1,15 @@
+.mt-2(*ngIf="isLoading && topTracks.length === 0")
+  ion-list
+    ion-item(*ngFor="let skeleton of [1, 2, 3, 4, 5]")
+      ion-skeleton-text.cover
+      ion-skeleton-text.item-text.text-heading.xxsmall.mt-2
+
+ion-list.mt-2(*ngIf="!isLoading && topTracks.length > 0")
+  song-item(*ngFor="let track of topTracks.slice(0, displayLimit); let i = index", [track]="track")
+
+.text-center.mt-3
+  a.description.xsmall(*ngIf="topTracks.length > displayLimit", (click)="showMore()") Show More
+    ion-icon.ml-2(name='chevron-down-outline')
+
+  a.description.xsmall(*ngIf="topTracks.length <= displayLimit", (click)="showLess()") Show Less
+    ion-icon.ml-2(name='chevron-up-outline')

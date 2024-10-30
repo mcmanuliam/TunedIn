@@ -34,12 +34,6 @@ const isEmpty = (value?: string) => !value && value === '';
   templateUrl: './profile-setup.page.pug',
 })
 export class ProfileSetupPage extends AbstractFormComponent<IValue> {
-  readonly #userSvc = inject(UserService);
-
-  readonly #reactionSvc = inject(ReactionService);
-
-  readonly #router = inject(Router);
-
   public readonly heading = 'Setup Your Profile.';
 
   public readonly description = 'Setup your profile to start capturing the world.';
@@ -55,6 +49,12 @@ export class ProfileSetupPage extends AbstractFormComponent<IValue> {
   }
 
   public toggled = false;
+
+  readonly #userSvc = inject(UserService);
+
+  readonly #reactionSvc = inject(ReactionService);
+
+  readonly #router = inject(Router);
 
   public constructor() {
     super()
@@ -95,7 +95,7 @@ export class ProfileSetupPage extends AbstractFormComponent<IValue> {
 
     try {
       await Promise.all([
-        await this.#reactionSvc.insert(reactionUrls, this.#userSvc.user?.id),
+        await this.#reactionSvc.upsert(reactionUrls, this.#userSvc.user?.id),
         await this.#userSvc.finialiseProfileSetup(this.value.displayName)
       ])
 
@@ -103,7 +103,7 @@ export class ProfileSetupPage extends AbstractFormComponent<IValue> {
       await this.#router.navigate(['/tabs/home'], {replaceUrl: true})
     } catch (error) {
       this.busy = false;
-      LogService.error('Error setting up profile:', 'profile-setup.page.onSubmit', error);
+      LogService.error('Error setting up profile', 'profile-setup.page.onSubmit', error);
     }
   }
 }

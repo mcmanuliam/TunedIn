@@ -2,6 +2,7 @@ import type {Provider} from '@angular/core';
 import {APP_INITIALIZER} from '@angular/core';
 import {Storage} from '@ionic/storage-angular';
 import {AuthService} from '../services/auth.service';
+import {LogService} from '../services/log.service';
 import {UserService} from '../services/user.service';
 
 /**
@@ -24,7 +25,7 @@ export function provideUserInitialization(): Provider[] {
         ])
         const sessionUser = await authSvc.getCurrentUser();
         if (!sessionUser) {
-          console.warn('[user-initialisation.useFactory] No session user, rerouting to sign-in');
+          LogService.warn('No session user, rerouting to sign-in', 'user-initialisation.useFactory');
           return;
         }
         await userSvc.get(sessionUser.id);

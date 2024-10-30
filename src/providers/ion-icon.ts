@@ -13,6 +13,13 @@ import {
   person,
   menu,
   chevronForwardOutline,
+  addOutline,
+  hammer,
+  chevronUpOutline,
+  chevronDownOutline,
+  play,
+  pause,
+  search,
 } from 'ionicons/icons';
 
 /**
@@ -26,16 +33,23 @@ export function provideIonIcons(): Provider[] {
       provide: APP_INITIALIZER,
       useFactory: () => () => {
         addIcons({
+          'add-outline': addOutline,
+          'chevron-down-outline': chevronDownOutline,
           'chevron-forward-outline': chevronForwardOutline,
+          'chevron-up-outline': chevronUpOutline,
           'close-outline': closeOutline,
           'eye-off-outline': eyeOffOutline,
           'eye-outline:': eyeOutline,
+          hammer,
           'heart-outline': heartOutline,
           'help-circle': helpCircle,
           home,
           menu,
           'navigate-circle': navigateCircle,
+          pause,
           person,
+          play,
+          search,
           warning
         });
       },

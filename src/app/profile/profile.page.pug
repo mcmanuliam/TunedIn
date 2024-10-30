@@ -1,8 +1,11 @@
 ion-header([translucent]="true")
   ion-toolbar.header
-    ion-icon.xxlarge.settings(button, name='menu', (click)='settings()')
-    .w-100.text-center
-      img.profile-pic(src='../../assets/images/profile-picture.svg')
-      p {{user?.display_name}}
+    .icons.flex
+      ion-icon.xxlarge.ml-2(button, name='menu', (click)='settings()')
+
+    .w-100.text-center.mt-5.mb-3
+      .m-a.w-30
+        profile-picture
+      .text-heading.small.ptb-3 {{user?.display_name}}
 
 ion-content

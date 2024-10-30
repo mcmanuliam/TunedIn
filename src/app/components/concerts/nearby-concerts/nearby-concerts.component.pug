@@ -1,0 +1,20 @@
+swiper-container(slides-per-view="1.5")
+    ng-container(*ngIf="isLoading && concerts.length === 0")
+        swiper-slide(*ngFor="let skeleton of [1, 2, 3]")
+            ion-skeleton-text.concert
+            ion-skeleton-text.skeleton-text.text-heading.xxsmall.mt-2
+
+    ng-container(*ngIf="!isLoading || concerts.length > 0")
+        ng-container(*ngFor="let concert of concerts")
+            swiper-slide
+                a([href]="concert.url", target="_blank")
+                    img.concert([src]="fetchImage(concert)", loading="lazy")
+                    .w-100
+                        .sub-heading.xxsmall.mt-1.overflow-ellipsis-1 {{concert.name}}
+                        .description.xxxsmall.mt-1.overflow-ellipsis-1(*ngIf='concert._embedded.venues && concert._embedded.venues.length > 0') {{concert._embedded.venues[0].name}}, {{concert._embedded.venues[0].city.name}}
+                        .description.xxxsmall.mt-1.overflow-ellipsis-1 {{concert.dates.start.localDate}}
+
+    swiper-slide(*ngIf="!isLoading")
+        a.icon-concert.concert
+            ion-icon.icon.large(name='add-outline')
+        .sub-heading.xxsmall.mt-1.w-100.overflow-ellipsis-1 See More

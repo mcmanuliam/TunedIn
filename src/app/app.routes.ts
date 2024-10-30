@@ -2,6 +2,7 @@ import type {Routes} from '@angular/router';
 import {AllowIfProfileSetup} from '../guards/profile-setup.guard';
 import {AllowIfUser} from '../guards/user.guard';
 import {FeedPage} from './feed/feed.page';
+import {SearchComponent} from './search/search.page';
 import {TabsPage} from './tabs/tabs.page';
 
 export const routes: Routes = [
@@ -20,6 +21,10 @@ export const routes: Routes = [
       {
         component: FeedPage,
         path: 'home',
+      },
+      {
+        component: SearchComponent,
+        path: 'search',
       },
       {
         loadChildren: () => import('./profile/profile-routing.module').then(m => m.ProfileRoutingModule),

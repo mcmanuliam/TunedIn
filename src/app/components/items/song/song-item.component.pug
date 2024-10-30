@@ -1,0 +1,9 @@
+ion-item
+  ion-thumbnail(slot="start")
+    img.cover([src]="track.album.images[0].url", loading="lazy")
+  ion-label
+    .overflow-ellipsis-1.sub-heading.xxsmall {{track.name}}
+    .overflow-ellipsis-2.description.xxxsmall {{getArtists(track)}}, {{track.duration_ms|formatDuration}}
+
+  ion-button(fill="clear", size="small", slot="end", (click)="play()")
+    ion-icon.play(name="play")

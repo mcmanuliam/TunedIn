@@ -47,22 +47,41 @@ jobs:
            * - Make sure this file is listed in your .gitignore to avoid accidental commits.
            */
 
+          interface IBackendConfig {
+            key: string;
+            url: string;
+          }
+
+          interface IClientSecret {
+            client: string;
+            secret: string;
+          }
+
           interface ILocalConfig {
-            backendKey: string,
+            backend: IBackendConfig,
+            spotify: IClientSecret,
+            ticketmaster: IClientSecret,
+          }
 
-            googleMapsKey: string,
+          const backend: IBackendConfig = {
+            key: '${{ secrets.BACKEND_KEY }}',
+            url: '${{ secrets.BACKEND_URL }}',
+          }
 
-            backendUrl: string,
+          const spotify: IClientSecret = {
+            client: '${{ secrets.SPOTIFY_CLIENT_ID }}',
+            secret: '${{ secrets.SPOTIFY_CLIENT_SECRET }}',
+          }
+
+          const ticketmaster: IClientSecret = {
+            client: '${{ secrets.TICKETMASTER_CLIENT_ID }}',
+            secret: '${{ secrets.TICKETMASTER_CLIENT_SECRET }}',
           }
 
           export const local: ILocalConfig = {
-            /* Server Backend Key */
-            backendKey: '${{ secrets.BACKEND_KEY }}',
-
-            /* Server Backend URL */
-            backendUrl: '${{ secrets.BACKEND_URL }}',
-
-            googleMapsKey: '${{ secrets.GOOGLE_MAPS_KEY }}',
+            backend,
+            spotify,
+            ticketmaster,
           };
           EOL
 
@@ -109,22 +128,41 @@ jobs:
            * - Make sure this file is listed in your .gitignore to avoid accidental commits.
            */
 
+          interface IBackendConfig {
+            key: string;
+            url: string;
+          }
+
+          interface IClientSecret {
+            client: string;
+            secret: string;
+          }
+
           interface ILocalConfig {
-            backendKey: string,
+            backend: IBackendConfig,
+            spotify: IClientSecret,
+            ticketmaster: IClientSecret,
+          }
 
-            googleMapsKey: string,
+          const backend: IBackendConfig = {
+            key: '${{ secrets.BACKEND_KEY }}',
+            url: '${{ secrets.BACKEND_URL }}',
+          }
 
-            backendUrl: string,
+          const spotify: IClientSecret = {
+            client: '${{ secrets.SPOTIFY_CLIENT_ID }}',
+            secret: '${{ secrets.SPOTIFY_CLIENT_SECRET }}',
+          }
+
+          const ticketmaster: IClientSecret = {
+            client: '${{ secrets.TICKETMASTER_CLIENT_ID }}',
+            secret: '${{ secrets.TICKETMASTER_CLIENT_SECRET }}',
           }
 
           export const local: ILocalConfig = {
-            /* Server Backend Key */
-            backendKey: '${{ secrets.BACKEND_KEY }}',
-
-            /* Server Backend URL */
-            backendUrl: '${{ secrets.BACKEND_URL }}',
-
-            googleMapsKey: '${{ secrets.GOOGLE_MAPS_KEY }}',
+            backend,
+            spotify,
+            ticketmaster,
           };
           EOL
 

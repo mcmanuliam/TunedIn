@@ -13,19 +13,15 @@ import {local} from "../config/local";
 interface IEnvironment {
   backendKey: string,
 
-  googleMapsKey: string,
-
   backendUrl: string,
 
   production: boolean;
 }
 
 export const environment: IEnvironment = {
-  backendKey: local.backendKey,
+  backendKey: local.backend.key,
 
-  backendUrl: local.backendUrl,
-
-  googleMapsKey: local.googleMapsKey,
+  backendUrl: local.backend.url,
 
   production: true
 };

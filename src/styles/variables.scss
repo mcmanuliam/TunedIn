@@ -2,6 +2,13 @@
 // http://ionicframework.com/docs/theming/
 
 :root {
+	--swiper-pagination-color: var(--ion-text-color-step-500);
+	--swiper-pagination-bullet-inactive-color: var(--ion-text-color-step-500);
+	--swiper-pagination-bullet-inactive-opacity: 0.2;
+	--swiper-pagination-bullet-opacity: 1;
+	--swiper-pagination-bullet-size: 6px;
+	--swiper-pagination-bullet-horizontal-gap: 4px;
+
 	--ion-background-color: #fafcff;
 	--ion-background-color-rgb: 250,252,255;
 	--ion-text-color: #0C0F14;
@@ -11,7 +18,7 @@
 
 	--ion-accent-color: #00D37B;
 
-	--ion-navbar-background-color: #eaecf0;
+	--ion-navbar-background-color: #fafcff;
 	--ion-navbar-color: #727a85;
 	--ion-navbar-color-selected: #181919;
 	--ion-navbar-color-focused: #4d5054;
@@ -19,7 +26,12 @@
 	--ion-button-background: #1E2126;
 	--ion-button-background-hover: #24272C;
 	--ion-button-background-active: #181B20;
-	--ion-button-border: #30343B;
+	--ion-button-border: #ffffff;
+
+	--ion-player-background: #fafcff;
+	--ion-player-shadow: rgba(149, 157, 165, 0.2);
+
+	--ion-reaction-size: 3.75rem;
 
 	--ion-text-color-step-50: #181b20;
 	--ion-text-color-step-100: #24272c;
@@ -71,7 +83,7 @@
 
 		--ion-link-color: #8EA8DA;
 
-		--ion-navbar-background-color: #0d1117;
+		--ion-navbar-background-color: #0C0F14;
 		--ion-navbar-color: #727a85;
 		--ion-navbar-color-selected: #ebedef;
 		--ion-navbar-color-focused: #9fa6b0;
@@ -81,6 +93,9 @@
 		--ion-button-background-active: #181B20;
 		--ion-button-border-uploaded: #686f7e;
 		--ion-button-border: #30343B;
+
+		--ion-player-background: #181b20;
+		--ion-player-shadow: #0C0F14;
 
 		--ion-text-color-step-50: #eef0f3;
 		--ion-text-color-step-100: #e2e4e8;

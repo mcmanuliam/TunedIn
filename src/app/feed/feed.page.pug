@@ -1,7 +1,19 @@
-ion-header([translucent]="true")
-    ion-toolbar
-        .text-heading.xlarge.m-3 Discover
+ion-header
+    ion-toolbar.centre-toolbar
+        ion-title.text-heading.large Discover
 
-ion-content([fullscreen]='true').ion-padding
-    ion-thumbnail.w-100.h-20.mb-3
-        ion-skeleton-text([animated]='true')
+ion-content([fullscreen]='true', (click)='scrollToTop($event)').ion-padding
+    ion-header(collapse='condense').collapse
+        ion-toolbar
+            .text-heading.xlarge.mb-2 Discover
+            notes
+
+    .mb-4(*ngFor='let section of feedConf.layout')
+        .space-between.ml-2.mr-2.mb-1
+            .minor-heading.medium {{section.title}}
+            a.minor-heading.xxsmall.weight-600(
+                *ngIf='section.seeAllHandler',
+                [href]='section.seeAllHandler'
+            ) See All
+
+        ng-container(*ngComponentOutlet="section.component")

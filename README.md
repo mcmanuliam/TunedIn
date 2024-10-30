@@ -1,3 +1,8 @@
+### Cant forget Terry !!!
+And with all my projects I can't forget the main mantra:
+
+“An idiot admires complexity, a geniuss admires simplicity, a physicist tries to make it simple, for an idiot anything the more complicated it is the more he will admire it, if you make something so clusterfucked he can't understand it he's gonna think you're a god cause you made it so complicated nobody can understand it. That's how they write journals in Academics, they try to make it so complicated people think you're a genius” - Terry A. Davis
+
 ## What is TunedIn?
 TunedIn is a music based social media which allows users to see the most recent in music news and lets them share there taste with others.
 
@@ -115,4 +120,3 @@ COMMIT_TYPE[PLATFORM](LOCATION): COMMIT_MSG #COMMIT_NUMBER
 
 **COMMIT_NUMBER** this will be the issue number, **ALL COMMITS MUST ORIGINATE FROM AN ISSUE**, if no issue is raised - raise one.
 
-A big concept with our Version Control strategy is to be clean and concise, a way for us to easily maintain this is through [**Squashing**](https://medium.com/@flaviocopes/git-squashing-vs-not-squashing-af5009f47d9e#:~:text=Let's%20talk%20about%20squashing.,even%20squash%20commits%20at%20all%E2%80%9D%3F) commits, rather than having a feature with: `do something`, `fix something`, `fix the new fix` being merged into the codebase we will just merge `do something`.

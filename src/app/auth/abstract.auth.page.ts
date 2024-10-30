@@ -3,6 +3,7 @@ import type {OnInit} from '@angular/core';
 import {Component, inject, Input} from '@angular/core';
 import {Keyboard} from '@capacitor/keyboard';
 import {IonContent, IonFooter, IonToolbar} from '@ionic/angular/standalone';
+import {LogService} from '../../services/log.service';
 import {PlatformTypeService} from '../../services/platform-type.service';
 
 @Component({
@@ -32,11 +33,11 @@ export class AbstractAuthPage implements OnInit {
     if (this.#platformSvc.isPlatformNative){
       Keyboard.addListener('keyboardWillShow', () => {
         this.isKeyboardVisible = true;
-      }).catch(console.error);
+      }).catch((error: string) => LogService.error(error, 'abstract.auth.page.keyboardWillShow'));
 
       Keyboard.addListener('keyboardWillHide', () => {
         this.isKeyboardVisible = false;
-      }).catch(console.error);
+      }).catch((error: string) => LogService.error(error, 'abstract.auth.page.keyboardWillHide'));
     }
   }
 }

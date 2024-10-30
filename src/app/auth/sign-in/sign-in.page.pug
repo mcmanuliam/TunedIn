@@ -9,9 +9,10 @@ abstract-auth-page([heading]="heading", [description]="description").ion-page
                 ion-label([position]="'floating'") Password
                 ion-input([(ngModel)]='value.password', id='password', [type]="'password'", name='password', aria-label='Password', required)
                     ion-input-password-toggle(slot="end", color="light")
+
         .text-center
             ion-button.continue.mb-3(type='submit', shape='round', [disabled]="signInForm.invalid || busy")
                 .btn-text Sign In
 
-            .small((click)='navToSignUp()') Don't have an account?&nbsp;
-                a Sign Up.
+            .small.w-75.m-a Don't have an account?&nbsp;
+                a((click)='navToSignUp()') Sign Up.&nbsp;

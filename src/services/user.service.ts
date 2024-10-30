@@ -1,24 +1,29 @@
 import {inject, Injectable} from "@angular/core";
 import {Network} from "@capacitor/network";
 import {Storage} from '@ionic/storage-angular';
+import type {Observable} from "rxjs";
 import {BehaviorSubject} from "rxjs";
 import type {IUserProfile} from "../models/user";
 import {StoreNames} from "../util/enums/store-names.enum";
 import {TableNames} from "../util/enums/table-names.enum";
 import {LogService} from "./log.service";
-import {SupabaseService} from "./supabase.service";
+import {SupabaseService} from "./providers/supabase.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
+  public user$: Observable<IUserProfile | null>;
+
   readonly #supaSvc = inject(SupabaseService);
 
   readonly #storage = inject(Storage);
 
   #userSubject = new BehaviorSubject<IUserProfile | null>(null);
 
-  public user$ = this.#userSubject.asObservable();
+  public constructor() {
+    this.user$ = this.#userSubject.asObservable()
+  }
 
   public set user(user: IUserProfile | null) {
     this.#userSubject.next(user);
@@ -48,8 +53,9 @@ export class UserService {
         .single();
 
       if (error) {
-        LogService.error('Error fetching user profile:', 'user.service.get', error);
-        return await this.#storage.get(StoreNames.USER);
+        LogService.error('Error fetching user profile', 'user.service.get', error);
+        this.user = await this.#storage.get(StoreNames.USER);
+        return this.user;
       }
 
       this.user = data as IUserProfile;
@@ -69,7 +75,7 @@ export class UserService {
       .single();
 
     if (error) {
-      LogService.error('Error updating user profile:', 'user.service.update', error);
+      LogService.error('Error updating user profile', 'user.service.update', error);
       return null;
     }
 

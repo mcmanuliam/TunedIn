@@ -1,11 +1,19 @@
 ion-header
-    ion-toolbar.header
-      ion-back-button(slot='start')
-      ion-title Settings
+    ion-toolbar.centre-toolbar.w-90
+      ion-back-button(slot='start', text='').text-heading.small
+      ion-title.text-heading.large Settings
 
 ion-content([fullscreen]='true').ion-padding
   ion-list
+    .w-100.text-center
+      .m-a.w-30
+        profile-picture([editable]='true')
+        .ptb-2
+          a.xsmall.weight-500 Edit picture
+
     ion-item
       .small Account
 
-    ion-item.danger(button (click)='quit()') Sign Out
+    ion-item.xsmall Sign Out
+    ion-item.xsmall Sign Out
+    ion-item.danger.xsmall(button, (click)='quit()') Sign Out
